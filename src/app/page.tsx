@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '@/components/layout/Navbar';
 import HeroSection from '@/components/landing/HeroSection';
 import WorkflowSection from '@/components/landing/WorkflowSection';
 import FeatureCards from '@/components/landing/FeatureCards';
@@ -8,6 +9,7 @@ import DemoAccountsCard from '@/components/landing/DemoAccountsCard';
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
+      <Navbar />
       <HeroSection />
       <WorkflowSection />
       <FeatureCards />

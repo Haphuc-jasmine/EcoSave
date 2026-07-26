@@ -1,11 +1,11 @@
-import { useSyncExternalStore } from 'react';
-
-const emptySubscribe = () => () => {};
+import { useState, useEffect } from 'react';
 
 export function useHasMounted() {
-  return useSyncExternalStore(
-    emptySubscribe,
-    () => true,
-    () => false
-  );
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  return mounted;
 }

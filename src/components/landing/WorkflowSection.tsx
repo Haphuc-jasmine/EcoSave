@@ -1,54 +1,61 @@
+'use client';
+
 import React from 'react';
 import { Cpu, Lightbulb, ShoppingCart, FileText, ArrowRight } from 'lucide-react';
-
-const STEPS = [
-  {
-    step: '01',
-    icon: Cpu,
-    title: 'Forecast Demand',
-    description:
-      'Predict daily meal orders using AI analysis factoring weekday trends, rain/weather forecasts, local events, and historical demand.',
-    color: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-  },
-  {
-    step: '02',
-    icon: Lightbulb,
-    title: 'Recommend Action',
-    description:
-      'Receive actionable prep recommendations to adjust kitchen prep targets and avoid overproducing food before waste happens.',
-    color: 'bg-amber-100 text-amber-900 border-amber-200',
-  },
-  {
-    step: '03',
-    icon: ShoppingCart,
-    title: 'Sell Surplus',
-    description:
-      'Convert actual end-of-day leftovers into discounted marketplace listings with dynamic pricing based on time remaining.',
-    color: 'bg-teal-100 text-teal-900 border-teal-200',
-  },
-  {
-    step: '04',
-    icon: FileText,
-    title: 'Report ESG Impact',
-    description:
-      'Quantify food saved, CO2e emissions reduced, and revenue recovered to export audit-ready monthly ESG reports.',
-    color: 'bg-slate-100 text-slate-800 border-slate-200',
-  },
-];
+import { useLanguage, TranslationKey } from '@/context/LanguageContext';
 
 export default function WorkflowSection() {
+  const { t } = useLanguage();
+
+  const STEPS: Array<{
+    step: string;
+    icon: typeof Cpu;
+    titleKey: TranslationKey;
+    descKey: TranslationKey;
+    color: string;
+  }> = [
+    {
+      step: '01',
+      icon: Cpu,
+      titleKey: 'workflowStep1Title',
+      descKey: 'workflowStep1Desc',
+      color: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    },
+    {
+      step: '02',
+      icon: Lightbulb,
+      titleKey: 'workflowStep2Title',
+      descKey: 'workflowStep2Desc',
+      color: 'bg-amber-100 text-amber-900 border-amber-200',
+    },
+    {
+      step: '03',
+      icon: ShoppingCart,
+      titleKey: 'workflowStep3Title',
+      descKey: 'workflowStep3Desc',
+      color: 'bg-teal-100 text-teal-900 border-teal-200',
+    },
+    {
+      step: '04',
+      icon: FileText,
+      titleKey: 'workflowStep4Title',
+      descKey: 'workflowStep4Desc',
+      color: 'bg-slate-100 text-slate-800 border-slate-200',
+    },
+  ];
+
   return (
     <section id="how-it-works" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
-            The EcoSave Workflow
+            {t('workflowBadge')}
           </h2>
           <p className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
-            From Demand Prediction to Carbon Offset Reporting
+            {t('workflowTitle')}
           </p>
           <p className="mt-3 text-slate-600 text-sm">
-            A seamless cycle that stops food waste before it starts and monetizes unavoidable surplus.
+            {t('workflowSubtitle')}
           </p>
         </div>
 
@@ -68,9 +75,9 @@ export default function WorkflowSection() {
                     </div>
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
-                    {item.title}
+                    {t(item.titleKey)}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">{item.description}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed">{t(item.descKey)}</p>
                 </div>
 
                 {idx < STEPS.length - 1 && (

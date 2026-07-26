@@ -1,13 +1,16 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
+import { translations } from '@/data/translations';
 
 export type Language = 'en' | 'vi';
+export type TranslationKey = keyof typeof translations.en;
 
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
+  t: (key: TranslationKey) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -19,9 +22,16 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLanguage((prev) => (prev === 'en' ? 'vi' : 'en'));
   }, []);
 
+  const t = React.useCallback(
+    (key: TranslationKey): string => {
+      return translations[language][key] || translations.en[key] || key;
+    },
+    [language]
+  );
+
   const value = React.useMemo(
-    () => ({ language, setLanguage, toggleLanguage }),
-    [language, toggleLanguage]
+    () => ({ language, setLanguage, toggleLanguage, t }),
+    [language, toggleLanguage, t]
   );
 
   return (

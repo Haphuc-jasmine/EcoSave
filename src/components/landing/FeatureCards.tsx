@@ -1,55 +1,62 @@
+'use client';
+
 import React from 'react';
 import { BrainCircuit, Tag, Store, BarChart3, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-
-const FEATURES = [
-  {
-    icon: BrainCircuit,
-    title: 'AI Demand Forecast',
-    badge: 'Core Engine',
-    description:
-      'Predict order volume per hour with 78–92% confidence. Evaluates weather impact, day of week, local concerts, and historic trends.',
-    link: '/login?role=restaurant',
-  },
-  {
-    icon: Tag,
-    title: 'Dynamic Time Pricing',
-    badge: 'Revenue Maximizer',
-    description:
-      'Automatically adjust meal pricing as expiration windows shrink (>90m = 20% off, 45–90m = 35% off, <45m = 50% off) to ensure 100% sell-through.',
-    link: '/login?role=restaurant',
-  },
-  {
-    icon: Store,
-    title: 'Surplus Marketplace',
-    badge: 'Customer Portal',
-    description:
-      'Connect eco-conscious diners with discounted meals nearby. Instant pickup codes, distance sorting, and live stock countdowns.',
-    link: '/login?role=customer',
-  },
-  {
-    icon: BarChart3,
-    title: 'Automated ESG Reporting',
-    badge: 'Audit Ready',
-    description:
-      'Transform kitchen operations into verified environmental achievements: CO2e reduced, food weight saved, water conserved, and badges unlocked.',
-    link: '/login?role=restaurant',
-  },
-];
+import { useLanguage, TranslationKey } from '@/context/LanguageContext';
 
 export default function FeatureCards() {
+  const { t } = useLanguage();
+
+  const FEATURES: Array<{
+    icon: typeof BrainCircuit;
+    titleKey: TranslationKey;
+    badgeKey: TranslationKey;
+    descKey: TranslationKey;
+    link: string;
+  }> = [
+    {
+      icon: BrainCircuit,
+      titleKey: 'feat1Title',
+      badgeKey: 'feat1Badge',
+      descKey: 'feat1Desc',
+      link: '/login?role=restaurant',
+    },
+    {
+      icon: Tag,
+      titleKey: 'feat2Title',
+      badgeKey: 'feat2Badge',
+      descKey: 'feat2Desc',
+      link: '/login?role=restaurant',
+    },
+    {
+      icon: Store,
+      titleKey: 'feat3Title',
+      badgeKey: 'feat3Badge',
+      descKey: 'feat3Desc',
+      link: '/login?role=customer',
+    },
+    {
+      icon: BarChart3,
+      titleKey: 'feat4Title',
+      badgeKey: 'feat4Badge',
+      descKey: 'feat4Desc',
+      link: '/login?role=restaurant',
+    },
+  ];
+
   return (
     <section id="features" className="py-20 bg-[#F6F8F7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
-            Powerful Capabilities
+            {t('featuresBadge')}
           </h2>
           <p className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
-            Everything Restaurants & Diners Need
+            {t('featuresTitle')}
           </p>
           <p className="mt-3 text-slate-600 text-sm">
-            Designed for intuitive kitchen management and smooth consumer meal reservation.
+            {t('featuresSubtitle')}
           </p>
         </div>
 
@@ -58,7 +65,7 @@ export default function FeatureCards() {
             const Icon = feat.icon;
             return (
               <div
-                key={feat.title}
+                key={feat.titleKey}
                 className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
@@ -67,18 +74,18 @@ export default function FeatureCards() {
                       <Icon className="w-6 h-6" />
                     </div>
                     <span className="text-[11px] font-bold uppercase tracking-wider bg-emerald-100/80 text-emerald-800 px-2.5 py-1 rounded-full">
-                      {feat.badge}
+                      {t(feat.badgeKey)}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{feat.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-6">{feat.description}</p>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{t(feat.titleKey)}</h3>
+                  <p className="text-sm text-slate-600 leading-relaxed mb-6">{t(feat.descKey)}</p>
                 </div>
 
                 <Link
                   href={feat.link}
                   className="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 hover:text-emerald-800 group-hover:translate-x-1 transition-all"
                 >
-                  <span>Experience in Demo</span>
+                  <span>{t('featuresExpDemo')}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

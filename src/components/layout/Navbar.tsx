@@ -81,23 +81,27 @@ export default function Navbar() {
           <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
             <button
               onClick={() => setLanguage('en')}
-              className={`px-2 py-1 rounded-md transition-all ${
+              title="English"
+              className={`px-2 py-1 rounded-md transition-all flex items-center gap-1.5 ${
                 language === 'en'
-                  ? 'bg-white text-emerald-800 shadow-sm font-bold'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-white text-emerald-950 shadow-sm font-bold border border-slate-200/60'
+                  : 'text-slate-500 hover:text-slate-800 opacity-60 hover:opacity-100'
               }`}
             >
-              EN
+              <span className="text-sm leading-none">🇬🇧</span>
+              <span className="text-[11px]">EN</span>
             </button>
             <button
               onClick={() => setLanguage('vi')}
-              className={`px-2 py-1 rounded-md transition-all ${
+              title="Tiếng Việt"
+              className={`px-2 py-1 rounded-md transition-all flex items-center gap-1.5 ${
                 language === 'vi'
-                  ? 'bg-white text-emerald-800 shadow-sm font-bold'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-white text-emerald-950 shadow-sm font-bold border border-slate-200/60'
+                  : 'text-slate-500 hover:text-slate-800 opacity-60 hover:opacity-100'
               }`}
             >
-              VI
+              <span className="text-sm leading-none">🇻🇳</span>
+              <span className="text-[11px]">VI</span>
             </button>
           </div>
 
@@ -207,23 +211,27 @@ export default function Navbar() {
             <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
               <button
                 onClick={() => setLanguage('en')}
-                className={`px-2.5 py-1 rounded-md transition-all ${
+                title="English"
+                className={`px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 ${
                   language === 'en'
-                    ? 'bg-white text-emerald-800 shadow-sm font-bold'
-                    : 'text-slate-500'
+                    ? 'bg-white text-emerald-950 shadow-sm font-bold border border-slate-200/60'
+                    : 'text-slate-500 hover:text-slate-800 opacity-60 hover:opacity-100'
                 }`}
               >
-                EN
+                <span className="text-sm leading-none">🇬🇧</span>
+                <span className="text-[11px]">EN</span>
               </button>
               <button
                 onClick={() => setLanguage('vi')}
-                className={`px-2.5 py-1 rounded-md transition-all ${
+                title="Tiếng Việt"
+                className={`px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 ${
                   language === 'vi'
-                    ? 'bg-white text-emerald-800 shadow-sm font-bold'
-                    : 'text-slate-500'
+                    ? 'bg-white text-emerald-950 shadow-sm font-bold border border-slate-200/60'
+                    : 'text-slate-500 hover:text-slate-800 opacity-60 hover:opacity-100'
                 }`}
               >
-                VI
+                <span className="text-sm leading-none">🇻🇳</span>
+                <span className="text-[11px]">VI</span>
               </button>
             </div>
           </div>

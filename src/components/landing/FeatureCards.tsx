@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useLanguage, TranslationKey } from '@/context/LanguageContext';
 
 export default function FeatureCards() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const FEATURES: Array<{
     icon: typeof BrainCircuit;
@@ -53,7 +53,13 @@ export default function FeatureCards() {
             {t('featuresBadge')}
           </h2>
           <p className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
-            {t('featuresTitle')}
+            {language === 'vi' ? (
+              <>
+                Tất Cả Những Gì Nhà Hàng <br />& Khách Hàng Cần
+              </>
+            ) : (
+              t('featuresTitle')
+            )}
           </p>
           <p className="mt-3 text-slate-600 text-sm">
             {t('featuresSubtitle')}

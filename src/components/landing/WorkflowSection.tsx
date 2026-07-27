@@ -5,7 +5,7 @@ import { Cpu, Lightbulb, ShoppingCart, FileText, ArrowRight } from 'lucide-react
 import { useLanguage, TranslationKey } from '@/context/LanguageContext';
 
 export default function WorkflowSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const STEPS: Array<{
     step: string;
@@ -47,7 +47,7 @@ export default function WorkflowSection() {
   return (
     <section id="how-it-works" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div className={`text-center ${language === 'vi' ? 'max-w-3xl' : 'max-w-2xl'} mx-auto mb-16`}>
           <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
             {t('workflowBadge')}
           </h2>

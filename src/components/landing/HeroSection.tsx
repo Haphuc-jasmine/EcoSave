@@ -6,15 +6,44 @@ import { TrendingUp, ShoppingBag, ArrowRight, ShieldCheck, Sparkles, Leaf } from
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function HeroSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section className="relative pt-12 pb-20 overflow-hidden bg-gradient-to-b from-emerald-50/60 via-white to-[#F6F8F7]">
       {/* Decorative background blobs */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-emerald-200/20 blur-3xl rounded-full pointer-events-none -z-10" />
 
+      {/* Premium ESG illustration */}
+      <div className="absolute inset-0 pointer-events-none -z-10 flex justify-center items-end">
+        <svg
+          className="w-full max-w-6xl h-auto opacity-80"
+          viewBox="0 0 1200 600"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style={{ filter: "none" }}
+        >
+          {/* Plate */}
+          <circle cx="300" cy="150" r="120" fill="#F0F9F5" />
+          {/* Surplus food stack */}
+          <path d="M260 130 h80 v30 h-80 Z" fill="#A7D3A6" />
+          <path d="M260 160 h80 v25 h-80 Z" fill="#81C784" />
+          <path d="M260 185 h80 v20 h-80 Z" fill="#4CAF50" />
+          {/* Fork */}
+          <path d="M340 130 v40" stroke="#5D8233" strokeWidth="2" />
+          <path d="M340 130 h-6 M340 130 h6" stroke="#5D8233" strokeWidth="2" />
+          <path d="M340 170 h-8 v10 h16 v-10 h-8" fill="#5D8233" />
+          {/* Leaf */}
+          <path d="M200 180 c10 -20 30 -20 40 0 c-10 20 -30 20 -40 0" fill="#70A07A" />
+          {/* AI spark elements */}
+          <circle cx="420" cy="120" r="4" fill="#66BB6A" />
+          <circle cx="440" cy="140" r="3" fill="#66BB6A" />
+          <circle cx="460" cy="110" r="2" fill="#66BB6A" />
+        </svg>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-6">
+        <div className={`text-center ${language === 'vi' ? 'max-w-4xl' : 'max-w-3xl'} mx-auto space-y-6`}>
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-emerald-100/80 text-emerald-800 border border-emerald-300/50 px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />

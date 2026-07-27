@@ -24,7 +24,7 @@ const RESTAURANT_NAV = [
   { label: 'AI Forecast', href: '/restaurant/forecast', icon: TrendingUp },
   { label: 'Surplus Meals', href: '/restaurant/surplus', icon: Package },
   { label: 'Marketplace Listings', href: '/restaurant/listings', icon: ShoppingBag },
-  { label: 'ESG Dashboard', href: '/restaurant/esg', icon: BarChart3, badge: 'M8' },
+  { label: 'ESG Dashboard', href: '/restaurant/esg', icon: BarChart3 },
   { label: 'Profile & Settings', href: '/restaurant/profile', icon: Settings, badge: 'M9' },
 ];
 

@@ -92,15 +92,15 @@ export default function QuickActions() {
 
         {/* Action 4: Generate ESG Report */}
         <Link
-          href="/restaurant/listings"
+          href="/restaurant/esg"
           className="p-4 bg-teal-50/70 hover:bg-teal-100/70 border border-teal-200/80 rounded-2xl text-left transition-all group flex flex-col justify-between h-28"
         >
           <div className="w-8 h-8 rounded-xl bg-teal-700 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
             <FileText className="w-4 h-4" />
           </div>
           <div>
-            <div className="text-xs font-bold text-teal-950">My Listings</div>
-            <div className="text-[10px] text-teal-800">View marketplace</div>
+            <div className="text-xs font-bold text-teal-950">Generate Report</div>
+            <div className="text-[10px] text-teal-800">Export ESG PDF</div>
           </div>
         </Link>
       </div>

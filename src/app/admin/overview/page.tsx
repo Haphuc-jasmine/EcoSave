@@ -51,6 +51,17 @@ export default function AdminOverviewPage() {
   );
   const [generatingReport, setGeneratingReport] = useState(false);
   const [reportGenerated, setReportGenerated] = useState(false);
+  const [activePointIndex, setActivePointIndex] = useState<number | null>(null);
+
+  const TREND_DATA = [
+    { label: 'Jan', x: 40, revY: 130, co2Y: 145, revVal: '22.0M đ', co2Val: '750 kg' },
+    { label: 'Feb', x: 113, revY: 115, co2Y: 132, revVal: '28.5M đ', co2Val: '1,020 kg' },
+    { label: 'Mar', x: 186, revY: 95, co2Y: 115, revVal: '35.0M đ', co2Val: '1,310 kg' },
+    { label: 'Apr', x: 260, revY: 75, co2Y: 96, revVal: '41.0M đ', co2Val: '1,590 kg' },
+    { label: 'May', x: 333, revY: 55, co2Y: 78, revVal: '48.0M đ', co2Val: '1,840 kg' },
+    { label: 'Jun', x: 406, revY: 38, co2Y: 62, revVal: '55.4M đ', co2Val: '2,010 kg' },
+    { label: 'Jul', x: 480, revY: 25, co2Y: 48, revVal: '62.2M đ', co2Val: '2,053.3 kg' },
+  ];
 
   // Platform KPIs
   const activeListings = listings.filter((l) => l.status === 'active').length;
@@ -196,10 +207,10 @@ export default function AdminOverviewPage() {
                   {kpi.unit && <span className="text-sm font-bold text-slate-600">{kpi.unit}</span>}
                 </div>
               </div>
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-600 font-medium">{kpi.sub}</span>
-                <span className="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full text-[11px] flex items-center gap-0.5">
-                  <ArrowUpRight className="w-3 h-3" /> {kpi.growth}
+              <div className="mt-3 pt-3 border-t border-slate-100 flex flex-col items-start gap-1.5 text-xs">
+                <span className="text-slate-500 font-medium">{kpi.sub}</span>
+                <span className="font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/50 px-2 py-0.5 rounded-full text-[10px] flex items-center gap-0.5">
+                  <ArrowUpRight className="w-3 h-3 text-emerald-600" /> {kpi.growth}
                 </span>
               </div>
             </div>
@@ -236,8 +247,8 @@ export default function AdminOverviewPage() {
           </div>
 
           {/* SVG Trend Chart */}
-          <div className="h-64 w-full pt-4">
-            <svg className="w-full h-full overflow-visible" viewBox="0 0 500 200">
+          <div className="h-64 w-full pt-4 relative">
+            <svg className="w-full h-full overflow-hidden" viewBox="0 0 500 200">
               <defs>
                 <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#059669" stopOpacity="0.3" />
@@ -291,16 +302,21 @@ export default function AdminOverviewPage() {
                 strokeLinecap="round"
               />
 
+              {/* Active Hover vertical guide line */}
+              {activePointIndex !== null && (
+                <line
+                  x1={TREND_DATA[activePointIndex].x}
+                  y1="20"
+                  x2={TREND_DATA[activePointIndex].x}
+                  y2="170"
+                  stroke="#cbd5e1"
+                  strokeWidth="1.5"
+                  strokeDasharray="3 3"
+                />
+              )}
+
               {/* Data points & X Axis Labels */}
-              {[
-                { x: 40, label: 'Jan', val: '22M' },
-                { x: 113, label: 'Feb', val: '28.5M' },
-                { x: 186, label: 'Mar', val: '35M' },
-                { x: 260, label: 'Apr', val: '41M' },
-                { x: 333, label: 'May', val: '48M' },
-                { x: 406, label: 'Jun', val: '55.4M' },
-                { x: 480, label: 'Jul', val: '62M' },
-              ].map((pt, i) => (
+              {TREND_DATA.map((pt, i) => (
                 <g key={i}>
                   <line x1={pt.x} y1="170" x2={pt.x} y2="175" stroke="#cbd5e1" strokeWidth="1.5" />
                   <text
@@ -311,17 +327,66 @@ export default function AdminOverviewPage() {
                   >
                     {pt.label}
                   </text>
-                  {/* Point highlights on Jul */}
-                  {i === 6 && (
+
+                  {/* Normal static July pulse if not hovering */}
+                  {i === 6 && activePointIndex === null && (
                     <>
                       <circle cx={pt.x} cy="25" r="6" fill="#059669" className="animate-ping opacity-75" />
                       <circle cx={pt.x} cy="25" r="5" fill="#059669" stroke="#ffffff" strokeWidth="2" />
                       <circle cx={pt.x} cy="48" r="4" fill="#0d9488" stroke="#ffffff" strokeWidth="2" />
                     </>
                   )}
+
+                  {/* Active hovered point highlights */}
+                  {activePointIndex === i && (
+                    <>
+                      <circle cx={pt.x} cy={pt.revY} r="7" fill="#059669" stroke="#ffffff" strokeWidth="2" className="shadow-sm" />
+                      <circle cx={pt.x} cy={pt.co2Y} r="6" fill="#0d9488" stroke="#ffffff" strokeWidth="2" className="shadow-sm" />
+                    </>
+                  )}
                 </g>
               ))}
+
+              {/* Invisible interactive columns for easy hovering */}
+              {TREND_DATA.map((pt, idx) => (
+                <rect
+                  key={`hit-${idx}`}
+                  x={pt.x - 25}
+                  y="20"
+                  width="50"
+                  height="150"
+                  fill="transparent"
+                  className="cursor-pointer"
+                  onMouseEnter={() => setActivePointIndex(idx)}
+                  onMouseLeave={() => setActivePointIndex(null)}
+                />
+              ))}
             </svg>
+
+            {/* Hover Tooltip Card */}
+            {activePointIndex !== null && (
+              <div
+                className="absolute bg-slate-900/95 text-white p-2.5 rounded-xl shadow-xl border border-slate-700/80 text-[11px] pointer-events-none transition-all duration-100 z-50 flex flex-col gap-1 w-32 backdrop-blur-xs"
+                style={{
+                  left: `${(TREND_DATA[activePointIndex].x / 500) * 100}%`,
+                  top: `${(TREND_DATA[activePointIndex].revY / 200) * 100}%`,
+                  transform: 'translate(-50%, -120%)',
+                }}
+              >
+                <div className="font-extrabold text-slate-300 text-center uppercase tracking-wider text-[9px]">
+                  {TREND_DATA[activePointIndex].label} 2026
+                </div>
+                <div className="h-px bg-slate-800 my-0.5" />
+                <div className="flex items-center justify-between font-bold text-emerald-400">
+                  <span>Revenue:</span>
+                  <span>{TREND_DATA[activePointIndex].revVal}</span>
+                </div>
+                <div className="flex items-center justify-between font-bold text-teal-400">
+                  <span>CO2 Saved:</span>
+                  <span>{TREND_DATA[activePointIndex].co2Val}</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

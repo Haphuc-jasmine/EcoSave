@@ -4,9 +4,11 @@ import React from 'react';
 import { BrainCircuit, Tag, Store, BarChart3, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { useLanguage, TranslationKey } from '@/context/LanguageContext';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 export default function FeatureCards() {
   const { t, language } = useLanguage();
+  const { ref: sectionRef, isVisible } = useScrollReveal<HTMLElement>();
 
   const FEATURES: Array<{
     icon: typeof BrainCircuit;
@@ -45,10 +47,41 @@ export default function FeatureCards() {
     },
   ];
 
+  const CARD_STYLES = [
+    {
+      // AI (Mint)
+      bg: 'bg-emerald-50/15 border-emerald-100/50',
+      hover: 'hover:bg-emerald-50/40 hover:border-emerald-300/60',
+      shadow: 'shadow-[0_4px_20px_rgba(4,120,87,0.02)] hover:shadow-[0_12px_30px_rgba(4,120,87,0.06)]',
+    },
+    {
+      // Pricing (Amber)
+      bg: 'bg-amber-50/15 border-amber-100/50',
+      hover: 'hover:bg-amber-50/40 hover:border-amber-300/60',
+      shadow: 'shadow-[0_4px_20px_rgba(180,83,9,0.02)] hover:shadow-[0_12px_30px_rgba(180,83,9,0.06)]',
+    },
+    {
+      // Marketplace (Teal)
+      bg: 'bg-teal-50/15 border-teal-100/50',
+      hover: 'hover:bg-teal-50/40 hover:border-teal-300/60',
+      shadow: 'shadow-[0_4px_20px_rgba(13,148,136,0.02)] hover:shadow-[0_12px_30px_rgba(13,148,136,0.06)]',
+    },
+    {
+      // ESG (Sky Blue)
+      bg: 'bg-sky-50/15 border-sky-100/50',
+      hover: 'hover:bg-sky-50/40 hover:border-sky-300/60',
+      shadow: 'shadow-[0_4px_20px_rgba(2,132,199,0.02)] hover:shadow-[0_12px_30px_rgba(2,132,199,0.06)]',
+    },
+  ];
+
   return (
-    <section id="features" className="py-20 bg-[#F6F8F7]">
+    <section id="features" ref={sectionRef} className="py-20 bg-[#F6F8F7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+        <div
+          className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+          }`}
+        >
           <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
             {t('featuresBadge')}
           </h2>
@@ -67,12 +100,15 @@ export default function FeatureCards() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {FEATURES.map((feat) => {
+          {FEATURES.map((feat, idx) => {
             const Icon = feat.icon;
+            const style = CARD_STYLES[idx];
             return (
               <div
                 key={feat.titleKey}
-                className="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                className={`${style.bg} ${style.hover} ${style.shadow} rounded-2xl p-8 border transition-all duration-300 ease-out hover:-translate-y-1.5 flex flex-col justify-between group ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

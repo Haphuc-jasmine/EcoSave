@@ -4,9 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import { UserCheck, Store, ShoppingBag, Shield, ArrowRight } from 'lucide-react';
 import { useLanguage, TranslationKey } from '@/context/LanguageContext';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 export default function DemoAccountsCard() {
   const { t } = useLanguage();
+  const { ref: sectionRef, isVisible } = useScrollReveal<HTMLElement>();
 
   const DEMO_PROFILES: Array<{
     roleKey: TranslationKey;
@@ -71,9 +73,13 @@ export default function DemoAccountsCard() {
   ];
 
   return (
-    <section id="demo-accounts" className="py-16 bg-white">
+    <section id="demo-accounts" ref={sectionRef} className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div
+          className={`text-center max-w-2xl mx-auto mb-12 transition-all duration-700 ease-out ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+          }`}
+        >
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
             {t('demoBadge')}
           </span>
@@ -86,12 +92,20 @@ export default function DemoAccountsCard() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {DEMO_PROFILES.map((p) => {
+          {DEMO_PROFILES.map((p, idx) => {
             const Icon = p.icon;
             return (
               <div
                 key={p.username}
-                className="bg-[#F6F8F7] border border-slate-200/90 rounded-2xl p-6 hover:shadow-lg transition-all duration-200 flex flex-col justify-between"
+                className={`bg-[#F6F8F7] border border-slate-200/90 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col justify-between ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+                }`}
+                style={{
+                  transitionProperty: 'opacity, transform, box-shadow',
+                  transitionDuration: '500ms',
+                  transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                  transitionDelay: isVisible ? `${idx * 80}ms` : '0ms',
+                }}
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">

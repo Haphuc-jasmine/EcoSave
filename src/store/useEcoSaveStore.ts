@@ -108,7 +108,16 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
       actualSalesToday: 103,
 
       login: (username: string) => {
-        const foundUser = get().users.find(
+        let currentUsers = get().users;
+        // Migration/Sync check for persisted local storage state
+        INITIAL_USERS.forEach((initUser) => {
+          if (!currentUsers.some((u) => u.username === initUser.username)) {
+            currentUsers = [...currentUsers, initUser];
+          }
+        });
+        set({ users: currentUsers });
+
+        const foundUser = currentUsers.find(
           (u) => u.username.toLowerCase() === username.trim().toLowerCase()
         );
         if (foundUser) {

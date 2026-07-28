@@ -1,20 +1,95 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { TrendingUp, ShoppingBag, ArrowRight, ShieldCheck, Sparkles, Leaf } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
+const HERO_IMAGES = [
+  {
+    src: '/hero-1.jpg',
+    alt: 'Fresh surplus gourmet meals in eco-friendly packaging',
+  },
+  {
+    src: '/hero-2.jpg',
+    alt: 'Modern restaurant kitchen preparing sustainable dishes',
+  },
+  {
+    src: '/hero-3.jpg',
+    alt: 'Urban organic farm garden promoting zero waste sustainability',
+  },
+];
+
 export default function HeroSection() {
   const { t, language } = useLanguage();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [parallaxY, setParallaxY] = useState(0);
+  const [contentVisible, setContentVisible] = useState(false);
+  const reducedMotion = useRef(false);
+
+  useEffect(() => {
+    reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Entrance animation — reveal content shortly after mount
+    const t1 = setTimeout(() => setContentVisible(true), 80);
+
+    if (reducedMotion.current) {
+      setContentVisible(true);
+      return () => clearTimeout(t1);
+    }
+
+    // Background image rotation
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+
+    // Subtle parallax on background only
+    const onScroll = () => {
+      setParallaxY(window.scrollY * 0.18);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      clearTimeout(t1);
+      clearInterval(interval);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
 
   return (
     <section className="relative pt-12 pb-20 overflow-hidden bg-gradient-to-b from-emerald-50/60 via-white to-[#F6F8F7]">
+      {/* Background Slideshow Layer — subtle parallax via translateY */}
+      <div
+        className="absolute inset-0 pointer-events-none -z-20 overflow-hidden"
+        style={{ transform: `translateY(${parallaxY}px)`, willChange: 'transform' }}
+      >
+        {HERO_IMAGES.map((img, index) => (
+          <div
+            key={img.src}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
+        ))}
+        {/* Soft white overlay to maintain standard layout structure with minimal interference */}
+        <div className="absolute inset-0 bg-white/5 backdrop-blur-[0.5px]" />
+      </div>
+
       {/* Decorative background blobs */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-emerald-200/20 blur-3xl rounded-full pointer-events-none -z-10" />
 
       {/* Premium ESG illustration */}
-      <div className="absolute inset-0 pointer-events-none -z-10 flex justify-center items-end">
+      <div className="absolute inset-0 pointer-events-none -z-10 flex justify-center items-end opacity-40">
         <svg
           className="w-full max-w-6xl h-auto opacity-80"
           viewBox="0 0 1200 600"
@@ -43,7 +118,11 @@ export default function HeroSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`text-center ${language === 'vi' ? 'max-w-4xl' : 'max-w-3xl'} mx-auto space-y-6`}>
+        <div
+          className={`text-center ${language === 'vi' ? 'max-w-4xl' : 'max-w-3xl'} mx-auto space-y-6 transition-all duration-700 ease-out ${
+            contentVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+          }`}
+        >
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-emerald-100/80 text-emerald-800 border border-emerald-300/50 px-4 py-1.5 rounded-full text-xs font-semibold shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
@@ -113,25 +192,25 @@ export default function HeroSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-emerald-50/70 p-4 rounded-xl border border-emerald-100">
+            <div className="bg-emerald-50/70 p-4 rounded-xl border border-emerald-100 transition-all duration-300 hover:-translate-y-1.5 hover:bg-emerald-50/95 hover:shadow-md">
               <div className="text-xs font-medium text-emerald-800">{t('heroCardExpectedOrders')}</div>
               <div className="text-2xl font-bold text-emerald-950 mt-1">128 {t('heroCardMeals')}</div>
               <div className="text-[11px] text-emerald-700 mt-1 font-medium">86% {t('heroCardConfidence')}</div>
             </div>
 
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 transition-all duration-300 hover:-translate-y-1.5 hover:bg-slate-100/80 hover:shadow-md">
               <div className="text-xs font-medium text-slate-500">{t('heroCardCurrentSales')}</div>
               <div className="text-2xl font-bold text-slate-800 mt-1">103 {t('heroCardMeals')}</div>
               <div className="text-[11px] text-slate-500 mt-1">{t('heroCardOnTrack')}</div>
             </div>
 
-            <div className="bg-amber-50/70 p-4 rounded-xl border border-amber-200/60">
+            <div className="bg-amber-50/70 p-4 rounded-xl border border-amber-200/60 transition-all duration-300 hover:-translate-y-1.5 hover:bg-amber-50/95 hover:shadow-md">
               <div className="text-xs font-medium text-amber-900">{t('heroCardEstimatedSurplus')}</div>
               <div className="text-2xl font-bold text-amber-950 mt-1">19 {t('heroCardMeals')}</div>
               <div className="text-[11px] text-amber-800 mt-1 font-medium">{t('heroCardMarketplaceReady')}</div>
             </div>
 
-            <div className="bg-teal-50/70 p-4 rounded-xl border border-teal-100">
+            <div className="bg-teal-50/70 p-4 rounded-xl border border-teal-100 transition-all duration-300 hover:-translate-y-1.5 hover:bg-teal-50/95 hover:shadow-md">
               <div className="text-xs font-medium text-teal-800">{t('heroCardRevenueRecovered')}</div>
               <div className="text-2xl font-bold text-teal-950 mt-1">2,300,000 VND</div>
               <div className="text-[11px] text-teal-700 mt-1 font-medium">21.4 kg {t('heroCardCo2Saved')}</div>

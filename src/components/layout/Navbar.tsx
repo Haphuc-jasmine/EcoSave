@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Leaf, LogOut, RotateCcw, UserCheck, ChevronRight, Menu, X, Globe } from 'lucide-react';
@@ -14,6 +14,15 @@ export default function Navbar() {
   const mounted = useHasMounted();
   const { language, setLanguage, t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll(); // run once on mount
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
 
   const handleLogout = () => {
     logout();
@@ -42,15 +51,21 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/80 transition-all shadow-sm">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/95 backdrop-blur-md border-b border-slate-200/70 shadow-[0_1px_20px_rgba(0,0,0,0.06)]'
+          : 'bg-white border-b border-slate-100/80 shadow-xs'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white shadow-md shadow-emerald-700/20 group-hover:bg-emerald-800 transition-all">
+          <div className="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white shadow-md shadow-emerald-700/20 group-hover:bg-emerald-800 transition-all duration-300">
             <Leaf className="w-5 h-5" />
           </div>
           <div>
-            <span className="font-extrabold text-xl tracking-tight text-slate-900">
+            <span className="font-extrabold text-xl tracking-tight text-slate-900 transition-colors duration-300">
               EcoSave
             </span>
             <span className="block text-[10px] uppercase tracking-wider font-semibold text-emerald-600 -mt-1">

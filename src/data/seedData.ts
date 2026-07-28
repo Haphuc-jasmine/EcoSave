@@ -30,9 +30,9 @@ export const INITIAL_USERS: User[] = [
   },
   {
     id: 'user_customer',
-    name: 'Phuc Nguyen',
-    username: 'phuc',
-    email: 'phuc.nguyen@example.com',
+    name: 'Phuc Ha',
+    username: 'phucha',
+    email: 'phucha@example.com',
     role: 'customer',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
   },

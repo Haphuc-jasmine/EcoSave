@@ -42,7 +42,7 @@ function LoginFormContent() {
 
   const initialUsername =
     userParam ||
-    (initialRole === 'customer' ? 'phuc' : initialRole === 'admin' ? 'admin' : 'pizza');
+    (initialRole === 'customer' ? 'phucha' : initialRole === 'admin' ? 'admin' : 'pizza');
 
   const [activeTab, setActiveTab] = useState<'restaurant' | 'customer' | 'admin'>(initialRole);
   const [username, setUsername] = useState(initialUsername);
@@ -55,7 +55,7 @@ function LoginFormContent() {
     setActiveTab(role);
     setErrorMessage('');
     if (role === 'restaurant') setUsername('pizza');
-    if (role === 'customer') setUsername('phuc');
+    if (role === 'customer') setUsername('phucha');
     if (role === 'admin') setUsername('admin');
     setPassword('demo123');
   };
@@ -82,7 +82,7 @@ function LoginFormContent() {
       if (success) {
         if (username === 'admin') {
           router.push('/admin/overview');
-        } else if (username === 'phuc') {
+        } else if (username === 'phucha') {
           router.push('/customer/marketplace');
         } else {
           router.push('/restaurant/dashboard');
@@ -100,12 +100,12 @@ function LoginFormContent() {
 
     // Future Google OAuth Handler Fallback: Perform instant authentication with current active role demo user
     setTimeout(() => {
-      const targetUser = activeTab === 'customer' ? 'phuc' : activeTab === 'admin' ? 'admin' : 'pizza';
+      const targetUser = activeTab === 'customer' ? 'phucha' : activeTab === 'admin' ? 'admin' : 'pizza';
       const success = login(targetUser);
       if (success) {
         if (targetUser === 'admin') {
           router.push('/admin/overview');
-        } else if (targetUser === 'phuc') {
+        } else if (targetUser === 'phucha') {
           router.push('/customer/marketplace');
         } else {
           router.push('/restaurant/dashboard');
@@ -294,10 +294,10 @@ function LoginFormContent() {
               {activeTab === 'customer' && (
                 <button
                   type="button"
-                  onClick={() => handleQuickFill('phuc')}
+                  onClick={() => handleQuickFill('phucha')}
                   className="text-xs px-3 py-1.5 rounded-lg border bg-emerald-50 border-emerald-500 text-emerald-900 font-bold"
                 >
-                  👤 Phuc Nguyen (@phuc)
+                  👤 Phuc Ha (@phucha)
                 </button>
               )}
               {activeTab === 'admin' && (

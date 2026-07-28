@@ -64,7 +64,7 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
         {
           id: 'ord_101',
           customerId: 'cust_phuc',
-          customerName: 'Phuc Nguyen',
+          customerName: 'Phuc Ha',
           listingId: 'list_1',
           restaurantId: 'rest_pizza',
           restaurantName: 'Pizza House',
@@ -237,7 +237,7 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
         const newOrder: Order = {
           id: `order_${Date.now()}`,
           customerId: state.currentUser?.id || 'cust_guest',
-          customerName: state.currentUser?.name || 'Phuc Nguyen',
+          customerName: state.currentUser?.name || 'Phuc Ha',
           listingId: listing.id,
           restaurantId: listing.restaurantId,
           restaurantName: listing.restaurantName,

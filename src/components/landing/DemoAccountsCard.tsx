@@ -50,13 +50,13 @@ export default function DemoAccountsCard() {
     },
     {
       roleKey: 'demoRoleCustomer',
-      username: 'phuc',
+      username: 'phucha',
       password: 'demo123',
-      name: 'Phuc Nguyen',
+      name: 'Phuc Ha',
       descKey: 'demoDescPhuc',
       icon: ShoppingBag,
       badgeColor: 'bg-teal-100 text-teal-800',
-      link: '/login?role=customer&user=phuc',
+      link: '/login?role=customer&user=phucha',
     },
     {
       roleKey: 'demoRoleAdmin',

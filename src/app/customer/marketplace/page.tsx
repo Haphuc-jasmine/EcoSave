@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { useEcoSaveStore } from '@/store/useEcoSaveStore';
 import { useHasMounted } from '@/lib/useHasMounted';
 import ListingCard from '@/components/marketplace/ListingCard';
 import MealDetailModal from '@/components/marketplace/MealDetailModal';
 import CustomerImpactStrip from '@/components/marketplace/CustomerImpactStrip';
 import { Listing } from '@/types';
-import { Search, SlidersHorizontal, MapPin, Tag, X } from 'lucide-react';
+import { Search, SlidersHorizontal, MapPin, Tag, X, ArrowLeft } from 'lucide-react';
 
 type SortMode = 'discount' | 'distance' | 'rating' | 'price_asc';
 
@@ -85,13 +86,22 @@ export default function CustomerMarketplacePage() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
-          Surplus Meal Marketplace
-        </h1>
-        <p className="text-sm text-slate-500 mt-1">
-          Rescue discounted surplus meals from nearby restaurants — save money and the planet. 🌱
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Surplus Meal Marketplace
+          </h1>
+          <p className="text-sm font-medium text-slate-600 mt-1">
+            Rescue discounted surplus meals from nearby restaurants — save money and the planet. 🌱
+          </p>
+        </div>
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs px-5 py-3 rounded-2xl transition-all shadow-md hover:scale-[1.02] shrink-0 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
+        >
+          <ArrowLeft className="w-4 h-4 text-emerald-400" />
+          <span>Back to Home</span>
+        </Link>
       </div>
 
       {/* Customer Impact Strip */}

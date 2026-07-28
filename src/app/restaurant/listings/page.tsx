@@ -125,7 +125,6 @@ export default function RestaurantListingsPage() {
 
             <div className="divide-y divide-slate-100">
               {mounted && myListings.map((listing) => {
-                const savedPerMeal = listing.originalPrice - listing.salePrice;
                 return (
                   <div
                     key={listing.id}

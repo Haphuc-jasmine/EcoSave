@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
 import { useRouter } from 'next/navigation';
 import PortalLayout from '@/components/layout/PortalLayout';
 import { useEcoSaveStore } from '@/store/useEcoSaveStore';
@@ -70,12 +71,10 @@ export default function SurplusPublishPage() {
   const [manualDiscount, setManualDiscount] = useState(false);
   const [manualDiscountPct, setManualDiscountPct] = useState(35);
   const [submitted, setSubmitted] = useState(false);
-  const [newPickupCode, setNewPickupCode] = useState('');
 
   const dynamicDiscount = computeDynamicDiscount(form.pickupWindow);
   const appliedDiscount = manualDiscount ? manualDiscountPct : dynamicDiscount;
   const salePrice = Math.round(form.originalPrice * (1 - appliedDiscount / 100));
-  const savedVnd = (form.originalPrice - salePrice) * form.quantity;
   const foodSavedKg = form.quantity * 0.45;
   const co2Saved = foodSavedKg * 2.5;
 
@@ -96,11 +95,14 @@ export default function SurplusPublishPage() {
 
     const restaurantId = currentUser?.restaurantId || 'rest_pizza';
     const restaurantName = currentUser?.name || 'Pizza House';
-    const code = `ECO-${Math.floor(1000 + Math.random() * 9000)}`;
+    // eslint-disable-next-line react-hooks/purity
+    const now = Date.now();
+    // eslint-disable-next-line react-hooks/purity
+    const randomSuffix = Math.floor(1000 + Math.random() * 9000);
 
     const newListing: Listing = {
-      id: `list_${Date.now()}`,
-      mealId: `meal_${Date.now()}`,
+      id: `list_${now}_${randomSuffix}`,
+      mealId: `meal_${now}_${randomSuffix}`,
       restaurantId,
       restaurantName,
       mealName: form.mealName,
@@ -119,7 +121,6 @@ export default function SurplusPublishPage() {
     };
 
     addListing(newListing);
-    setNewPickupCode(code);
     setSubmitted(true);
   };
 

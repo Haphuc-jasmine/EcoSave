@@ -23,7 +23,6 @@ import {
   Trash2,
   TrendingUp,
   ShoppingBag,
-  ChevronDown,
   X,
   FlaskConical,
 } from 'lucide-react';
@@ -46,23 +45,32 @@ function formatRevenue(vnd: number) {
 
 // ─── Mini SVG Line Chart ────────────────────────────────────────────────────
 function ESGTrendChart({ trend }: { trend: { label: string; co2: number; revenue: number; meals: number }[] }) {
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
   const maxCo2 = Math.max(...trend.map((d) => d.co2));
   const minCo2 = Math.min(...trend.map((d) => d.co2));
   const maxRev = Math.max(...trend.map((d) => d.revenue));
+  const minRev = Math.min(...trend.map((d) => d.revenue));
 
-  const W = 500, H = 180, PAD_L = 48, PAD_R = 16, PAD_T = 14, PAD_B = 36;
+  // Extra padding on right for secondary Y-axis labels (Revenue M VND)
+  const W = 500, H = 180, PAD_L = 44, PAD_R = 44, PAD_T = 20, PAD_B = 36;
   const chartW = W - PAD_L - PAD_R;
   const chartH = H - PAD_T - PAD_B;
   const n = trend.length;
 
   const co2Y = (v: number) => {
-    const range = maxCo2 - minCo2 || 1;
+    const range = (maxCo2 - minCo2) || 1;
     return PAD_T + chartH - ((v - minCo2) / range) * chartH;
   };
+
+  // Give Revenue Y-axis a padded domain so the amber line sits at a distinct height
   const revY = (v: number) => {
-    const range = maxRev || 1;
-    return PAD_T + chartH - (v / range) * chartH;
+    const minDomain = Math.min(0, minRev * 0.8);
+    const maxDomain = maxRev * 1.15;
+    const range = (maxDomain - minDomain) || 1;
+    return PAD_T + chartH - ((v - minDomain) / range) * chartH;
   };
+
   const xPos = (i: number) => PAD_L + (i / (n - 1 || 1)) * chartW;
 
   // Build SVG path strings
@@ -72,83 +80,174 @@ function ESGTrendChart({ trend }: { trend: { label: string; co2: number; revenue
   const co2AreaClose = ` L ${xPos(n - 1).toFixed(1)},${(PAD_T + chartH).toFixed(1)} L ${PAD_L},${(PAD_T + chartH).toFixed(1)} Z`;
   const revAreaClose = ` L ${xPos(n - 1).toFixed(1)},${(PAD_T + chartH).toFixed(1)} L ${PAD_L},${(PAD_T + chartH).toFixed(1)} Z`;
 
-  // Y-axis ticks (5 levels)
-  const yTicks = [0, 0.25, 0.5, 0.75, 1].map((t) => {
+  // Left Y-axis ticks (CO2)
+  const yTicksCo2 = [0, 0.33, 0.66, 1].map((t) => {
     const val = minCo2 + t * (maxCo2 - minCo2 || 1);
     return { y: co2Y(val), label: val >= 1000 ? `${(val / 1000).toFixed(1)}t` : `${Math.round(val)}` };
   });
 
-  return (
-    <svg className="w-full h-full overflow-visible" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet">
-      <defs>
-        <linearGradient id="co2AreaGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#059669" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#059669" stopOpacity="0.01" />
-        </linearGradient>
-        <linearGradient id="revAreaGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0d9488" stopOpacity="0.2" />
-          <stop offset="100%" stopColor="#0d9488" stopOpacity="0.01" />
-        </linearGradient>
-      </defs>
+  // Right Y-axis ticks (Revenue M VND)
+  const yTicksRev = [0, 0.5, 1].map((t) => {
+    const minDomain = Math.min(0, minRev * 0.8);
+    const maxDomain = maxRev * 1.15;
+    const val = minDomain + t * (maxDomain - minDomain);
+    return { y: revY(val), label: `${val.toFixed(0)}M` };
+  });
 
-      {/* Grid lines */}
-      {yTicks.map((tick, i) => (
-        <g key={i}>
-          <line x1={PAD_L} y1={tick.y} x2={W - PAD_R} y2={tick.y} stroke="#f1f5f9" strokeWidth="1.5" />
-          <text x={PAD_L - 6} y={tick.y + 4} textAnchor="end" fontSize="10" fill="#94a3b8" fontWeight="600">
+  const activeItem = hoveredIdx !== null ? trend[hoveredIdx] : null;
+
+  return (
+    <div className="relative w-full h-full">
+      <svg className="w-full h-full overflow-visible select-none" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="co2AreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#059669" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#059669" stopOpacity="0.01" />
+          </linearGradient>
+          <linearGradient id="revAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#d97706" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#d97706" stopOpacity="0.01" />
+          </linearGradient>
+        </defs>
+
+        {/* Grid lines (from Left CO2 axis) */}
+        {yTicksCo2.map((tick, i) => (
+          <g key={`co2-tick-${i}`}>
+            <line x1={PAD_L} y1={tick.y} x2={W - PAD_R} y2={tick.y} stroke="#f1f5f9" strokeWidth="1.5" />
+            <text x={PAD_L - 6} y={tick.y + 4} textAnchor="end" fontSize="9.5" fill="#059669" fontWeight="700">
+              {tick.label}
+            </text>
+          </g>
+        ))}
+
+        {/* Right Y-axis ticks (Revenue in Amber) */}
+        {yTicksRev.map((tick, i) => (
+          <text key={`rev-tick-${i}`} x={W - PAD_R + 6} y={tick.y + 4} textAnchor="start" fontSize="9.5" fill="#d97706" fontWeight="700">
             {tick.label}
           </text>
-        </g>
-      ))}
+        ))}
 
-      {/* Revenue area + line */}
-      <path d={revPath + revAreaClose} fill="url(#revAreaGrad)" />
-      <path d={revPath} fill="none" stroke="#0d9488" strokeWidth="2.5" strokeDasharray="5 2.5" strokeLinecap="round" strokeLinejoin="round" />
+        {/* Revenue area + line (Vibrant Amber / Gold) */}
+        <path d={revPath + revAreaClose} fill="url(#revAreaGrad)" />
+        <path d={revPath} fill="none" stroke="#d97706" strokeWidth="3" strokeDasharray="6 3" strokeLinecap="round" strokeLinejoin="round" />
 
-      {/* CO2 area + line */}
-      <path d={co2Path + co2AreaClose} fill="url(#co2AreaGrad)" />
-      <path d={co2Path} fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        {/* CO2 area + line (Emerald Green) */}
+        <path d={co2Path + co2AreaClose} fill="url(#co2AreaGrad)" />
+        <path d={co2Path} fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
 
-      {/* Data points + X labels */}
-      {trend.map((d, i) => {
-        const cx = xPos(i);
-        const cy = co2Y(d.co2);
-        const isLast = i === n - 1;
-        return (
-          <g key={i}>
-            {/* Baseline tick */}
-            <line x1={cx} y1={PAD_T + chartH} x2={cx} y2={PAD_T + chartH + 5} stroke="#cbd5e1" strokeWidth="1.5" />
-            {/* X label */}
-            <text
-              x={cx}
-              y={H - 2}
-              textAnchor="middle"
-              fontSize="9.5"
-              fill={isLast ? '#059669' : '#64748b'}
-              fontWeight={isLast ? '700' : '600'}
-            >
-              {d.label}
-            </text>
-            {/* CO2 dot */}
-            {isLast ? (
-              <>
-                <circle cx={cx} cy={cy} r="7" fill="#059669" opacity="0.2" className="animate-ping" />
-                <circle cx={cx} cy={cy} r="5" fill="#059669" stroke="#fff" strokeWidth="2" />
-              </>
-            ) : (
-              <circle cx={cx} cy={cy} r="3.5" fill="#059669" stroke="#fff" strokeWidth="1.5" />
-            )}
-          </g>
-        );
-      })}
-    </svg>
+        {/* Vertical hover guideline */}
+        {hoveredIdx !== null && (
+          <line
+            x1={xPos(hoveredIdx)}
+            y1={PAD_T}
+            x2={xPos(hoveredIdx)}
+            y2={PAD_T + chartH}
+            stroke="#94a3b8"
+            strokeWidth="1.5"
+            strokeDasharray="4 3"
+          />
+        )}
+
+        {/* Data points + X labels */}
+        {trend.map((d, i) => {
+          const cx = xPos(i);
+          const cyCo2 = co2Y(d.co2);
+          const cyRev = revY(d.revenue);
+          const isHovered = hoveredIdx === i;
+          const isLast = i === n - 1;
+
+          return (
+            <g key={i}>
+              {/* Baseline tick */}
+              <line x1={cx} y1={PAD_T + chartH} x2={cx} y2={PAD_T + chartH + 5} stroke="#cbd5e1" strokeWidth="1.5" />
+              {/* X label */}
+              <text
+                x={cx}
+                y={H - 2}
+                textAnchor="middle"
+                fontSize="9.5"
+                fill={isHovered ? '#0f172a' : isLast ? '#059669' : '#64748b'}
+                fontWeight={isHovered || isLast ? '700' : '600'}
+              >
+                {d.label}
+              </text>
+
+              {/* Revenue dot (Amber) */}
+              <circle
+                cx={cx}
+                cy={cyRev}
+                r={isHovered ? 6 : 4}
+                fill="#d97706"
+                stroke="#fff"
+                strokeWidth={isHovered ? 2.5 : 1.5}
+                className="transition-all duration-150"
+              />
+
+              {/* CO2 dot (Emerald) */}
+              <circle
+                cx={cx}
+                cy={cyCo2}
+                r={isHovered ? 6 : isLast ? 4.5 : 4}
+                fill="#059669"
+                stroke="#fff"
+                strokeWidth={isHovered ? 2.5 : 1.5}
+                className="transition-all duration-150"
+              />
+
+              {/* Transparent invisible touch/hover hit box */}
+              <rect
+                x={cx - chartW / (2 * (n - 1 || 1))}
+                y={PAD_T}
+                width={chartW / (n - 1 || 1)}
+                height={chartH + PAD_B}
+                fill="transparent"
+                className="cursor-pointer"
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+              />
+            </g>
+          );
+        })}
+      </svg>
+
+      {/* Compact Floating Tooltip Box */}
+      {hoveredIdx !== null && activeItem && (
+        <div
+          className="absolute z-30 pointer-events-none bg-slate-900/95 text-white text-[10px] rounded-lg px-2.5 py-1.5 shadow-lg border border-slate-700/80 backdrop-blur-sm whitespace-nowrap transition-all transform -translate-x-1/2 -translate-y-full"
+          style={{
+            left: `${(xPos(hoveredIdx) / W) * 100}%`,
+            top: `${Math.min(co2Y(activeItem.co2), revY(activeItem.revenue)) - 10}px`,
+          }}
+        >
+          <div className="font-extrabold text-amber-400 text-[10px] leading-none mb-1 pb-1 border-b border-slate-800 flex items-center justify-between gap-2">
+            <span>{activeItem.label}</span>
+            <span className="text-[9px] font-medium text-slate-400">({activeItem.meals} meals)</span>
+          </div>
+          <div className="space-y-0.5 font-semibold text-[10px]">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-emerald-400 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+                CO₂:
+              </span>
+              <strong className="text-white font-bold">{activeItem.co2 >= 1000 ? `${(activeItem.co2 / 1000).toFixed(2)}t` : `${activeItem.co2} kg`}</strong>
+            </div>
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-amber-400 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block" />
+                Rev:
+              </span>
+              <strong className="text-white font-bold">{activeItem.revenue.toFixed(1)}M VND</strong>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
 // ─── Monthly Bar Chart ──────────────────────────────────────────────────────
 function MonthlyBarChart({ data }: { data: { month: string; meals: number; co2: number; revenue: number }[] }) {
   const maxMeals = Math.max(...data.map((d) => d.meals));
-  const BAR_H = 120;
 
   return (
     <div className="space-y-3">
@@ -531,7 +630,7 @@ export default function RestaurantESGPage() {
               </div>
               <div className="flex items-center gap-4 text-[11px] font-bold text-slate-600">
                 <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block" /> CO₂ Prevented</span>
-                <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-teal-500 inline-block" /> Revenue (M VND)</span>
+                <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-600 inline-block" /> Revenue (M VND)</span>
               </div>
             </div>
             <div className="h-52 w-full pt-2">

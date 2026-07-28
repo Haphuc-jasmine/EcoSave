@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Cpu, CloudRain, Music, Sparkles, CheckCircle2, X } from 'lucide-react';
 import { useEcoSaveStore } from '@/store/useEcoSaveStore';
-import HourlyDemandChart from './HourlyDemandChart';
-import InfluencingFactorsCard from './InfluencingFactorsCard';
 
 const PHASES = [
   { step: 1, text: 'Analyzing 90-day historical order patterns...', icon: Cpu },
@@ -61,6 +59,8 @@ export default function ForecastSimulationModal() {
 
   if (!isForecastModalOpen) return null;
 
+  const ActiveIcon = PHASES[currentStep].icon;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md animate-fade-in">
       <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative overflow-hidden">
@@ -73,14 +73,54 @@ export default function ForecastSimulationModal() {
         </button>
 
         {!isCompleted ? (
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Left – chart (≈70%) */}
-            <div className="flex-1 md:w-7/10 min-w-0">
-              <HourlyDemandChart />
+          <div className="py-4 space-y-6">
+            <div className="text-center space-y-2">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-sm">
+                <ActiveIcon className="w-7 h-7 animate-pulse" />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Running AI Demand Forecast</h3>
+              <p className="text-xs text-slate-500 font-medium max-w-xs mx-auto">
+                {PHASES[currentStep].text}
+              </p>
             </div>
-            {/* Right – controls (≈30%) */}
-            <div className="md:w-3/10 w-full">
-              <InfluencingFactorsCard />
+
+            {/* Progress Bar */}
+            <div className="space-y-2">
+              <div className="flex justify-between text-xs font-semibold text-slate-600">
+                <span>Simulation Progress</span>
+                <span className="text-emerald-700 font-bold">{progress}%</span>
+              </div>
+              <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                <div
+                  className="h-full bg-emerald-600 rounded-full transition-all duration-150"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Step Indicators */}
+            <div className="space-y-2.5 pt-2">
+              {PHASES.map((p, idx) => {
+                const Icon = p.icon;
+                const active = idx === currentStep;
+                const done = idx < currentStep;
+                return (
+                  <div
+                    key={p.step}
+                    className={`flex items-center gap-3 p-2.5 rounded-xl border text-xs transition-all ${
+                      active
+                        ? 'bg-emerald-50 border-emerald-300 text-emerald-950 font-bold shadow-sm'
+                        : done
+                        ? 'bg-slate-50 border-slate-200 text-slate-700 font-medium'
+                        : 'bg-white border-slate-100 text-slate-400 opacity-60'
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 shrink-0 ${active ? 'text-emerald-600' : 'text-slate-400'}`} />
+                    <span className="truncate flex-1">{p.text}</span>
+                    {done && <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />}
+                  </div>
+                );
+              })}
             </div>
           </div>
         ) : (
@@ -101,7 +141,7 @@ export default function ForecastSimulationModal() {
             </div>
             <button
               onClick={handleClose}
-              className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm py-2 rounded-xl transition-all shadow-md"
+              className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm py-2 rounded-xl transition-all shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
             >
               Close
             </button>
@@ -111,3 +151,4 @@ export default function ForecastSimulationModal() {
     </div>
   );
 }
+

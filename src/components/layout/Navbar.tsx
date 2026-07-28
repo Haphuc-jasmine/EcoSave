@@ -109,20 +109,13 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               <Link
                 href={getPortalLink()}
-                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full hover:bg-emerald-100 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full hover:bg-emerald-100 transition-colors"
               >
                 <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
                 <span>{currentUser.name}</span>
                 <span className="bg-emerald-700 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase">
                   {currentUser.role}
                 </span>
-              </Link>
-              <Link
-                href={getPortalLink()}
-                className="inline-flex items-center gap-1 bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl transition-all shadow-sm shadow-emerald-700/20"
-              >
-                <span>Go to Portal</span>
-                <ChevronRight className="w-3.5 h-3.5" />
               </Link>
               <button
                 onClick={handleLogout}

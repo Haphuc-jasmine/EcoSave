@@ -13,12 +13,12 @@ import {
   Trophy,
   CheckCircle2,
   XCircle,
-  Clock,
   TrendingUp,
   Globe,
   Droplets,
   ArrowUpRight,
   Activity,
+  Clock,
 } from 'lucide-react';
 
 const BADGE_COLORS: Record<string, string> = {
@@ -32,17 +32,6 @@ const BADGE_ICONS: Record<string, string> = {
   'Green Hero': '🦸',
   'Green Starter': '🌱',
 };
-
-// Trend Data for Chart 1: Revenue (M VND) & CO2e Saved (100s kg) over 7 Months
-const TREND_DATA = [
-  { month: 'Jan', revenue: 22.0, co2: 720, meals: 480 },
-  { month: 'Feb', revenue: 28.5, co2: 940, meals: 620 },
-  { month: 'Mar', revenue: 35.0, co2: 1150, meals: 810 },
-  { month: 'Apr', revenue: 41.2, co2: 1380, meals: 1040 },
-  { month: 'May', revenue: 48.0, co2: 1620, meals: 1290 },
-  { month: 'Jun', revenue: 55.4, co2: 1840, meals: 1550 },
-  { month: 'Jul', revenue: 62.0, co2: 2050, meals: 1820 },
-];
 
 // Category Breakdown for Chart 2
 const CATEGORY_BREAKDOWN = [

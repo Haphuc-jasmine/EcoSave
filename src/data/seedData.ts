@@ -291,3 +291,134 @@ export const INITIAL_ESG_REPORTS: ESGReport[] = [
     generatedAt: '2026-07-26',
   },
 ];
+
+export const PERIOD_METRICS: Record<
+  string,
+  {
+    impact: ImpactRecord;
+    wasteReductionPct: number;
+    trend: { label: string; co2: number; revenue: number; meals: number }[];
+    categoryBreakdown: { name: string; count: number; pct: number; color: string; text: string }[];
+    monthlyComparison: { month: string; meals: number; co2: number; revenue: number }[];
+  }
+> = {
+  'Week': {
+    impact: {
+      mealsRescued: 420,
+      foodSavedKg: 189,
+      co2eSavedKg: 472.5,
+      revenueRecovered: 14500000,
+      waterSavedL: 10500,
+    },
+    wasteReductionPct: 31,
+    trend: [
+      { label: 'Mon', co2: 60, revenue: 1.8, meals: 52 },
+      { label: 'Tue', co2: 68, revenue: 2.1, meals: 60 },
+      { label: 'Wed', co2: 62, revenue: 1.9, meals: 55 },
+      { label: 'Thu', co2: 75, revenue: 2.3, meals: 66 },
+      { label: 'Fri', co2: 85, revenue: 2.7, meals: 76 },
+      { label: 'Sat', co2: 95, revenue: 2.9, meals: 84 },
+      { label: 'Sun', co2: 27.5, revenue: 0.8, meals: 27 },
+    ],
+    categoryBreakdown: [
+      { name: 'Pizza & Italian', count: 180, pct: 43, color: 'bg-emerald-600', text: 'text-emerald-900' },
+      { name: 'Vietnamese Noodle', count: 126, pct: 30, color: 'bg-teal-600', text: 'text-teal-900' },
+      { name: 'Japanese & Seafood', count: 71, pct: 17, color: 'bg-amber-500', text: 'text-amber-900' },
+      { name: 'Healthy & Vegan', count: 43, pct: 10, color: 'bg-blue-600', text: 'text-blue-900' },
+    ],
+    monthlyComparison: [
+      { month: 'Wk 1', meals: 95, co2: 106, revenue: 3.3 },
+      { month: 'Wk 2', meals: 105, co2: 118, revenue: 3.6 },
+      { month: 'Wk 3', meals: 110, co2: 123, revenue: 3.8 },
+      { month: 'Wk 4 (Current)', meals: 110, co2: 125.5, revenue: 3.8 },
+    ],
+  },
+  'Month': {
+    impact: {
+      mealsRescued: 1820,
+      foodSavedKg: 819,
+      co2eSavedKg: 2050,
+      revenueRecovered: 62000000,
+      waterSavedL: 45500,
+    },
+    wasteReductionPct: 28,
+    trend: [
+      { label: 'Jul 1-5', co2: 320, revenue: 9.8, meals: 280 },
+      { label: 'Jul 6-10', co2: 610, revenue: 18.5, meals: 540 },
+      { label: 'Jul 11-15', co2: 950, revenue: 28.8, meals: 840 },
+      { label: 'Jul 16-20', co2: 1320, revenue: 40.0, meals: 1170 },
+      { label: 'Jul 21-25', co2: 1710, revenue: 51.5, meals: 1510 },
+      { label: 'Jul 26-31', co2: 2050, revenue: 62.0, meals: 1820 },
+    ],
+    categoryBreakdown: [
+      { name: 'Pizza & Italian', count: 780, pct: 43, color: 'bg-emerald-600', text: 'text-emerald-900' },
+      { name: 'Vietnamese Noodle', count: 546, pct: 30, color: 'bg-teal-600', text: 'text-teal-900' },
+      { name: 'Japanese & Seafood', count: 310, pct: 17, color: 'bg-amber-500', text: 'text-amber-900' },
+      { name: 'Healthy & Vegan', count: 184, pct: 10, color: 'bg-blue-600', text: 'text-blue-900' },
+    ],
+    monthlyComparison: [
+      { month: 'Apr 2026', meals: 1040, co2: 1170, revenue: 35.5 },
+      { month: 'May 2026', meals: 1290, co2: 1450, revenue: 44.0 },
+      { month: 'Jun 2026', meals: 1550, co2: 1745, revenue: 53.0 },
+      { month: 'Jul 2026 (Current)', meals: 1820, co2: 2050, revenue: 62.0 },
+    ],
+  },
+  'Quarter': {
+    impact: {
+      mealsRescued: 4660,
+      foodSavedKg: 2097,
+      co2eSavedKg: 5245,
+      revenueRecovered: 159000000,
+      waterSavedL: 116500,
+    },
+    wasteReductionPct: 26,
+    trend: [
+      { label: 'Apr 2026', co2: 1450, revenue: 44.0, meals: 1290 },
+      { label: 'May 2026', co2: 3195, revenue: 97.0, meals: 2840 },
+      { label: 'Jun 2026 (Q2 Peak)', co2: 5245, revenue: 159.0, meals: 4660 },
+    ],
+    categoryBreakdown: [
+      { name: 'Pizza & Italian', count: 2004, pct: 43, color: 'bg-emerald-600', text: 'text-emerald-900' },
+      { name: 'Vietnamese Noodle', count: 1398, pct: 30, color: 'bg-teal-600', text: 'text-teal-900' },
+      { name: 'Japanese & Seafood', count: 792, pct: 17, color: 'bg-amber-500', text: 'text-amber-900' },
+      { name: 'Healthy & Vegan', count: 466, pct: 10, color: 'bg-blue-600', text: 'text-blue-900' },
+    ],
+    monthlyComparison: [
+      { month: 'Q3 2025', meals: 2800, co2: 3150, revenue: 95.0 },
+      { month: 'Q4 2025', meals: 3400, co2: 3825, revenue: 116.0 },
+      { month: 'Q1 2026', meals: 3950, co2: 4440, revenue: 134.5 },
+      { month: 'Q2 2026', meals: 4660, co2: 5245, revenue: 159.0 },
+    ],
+  },
+  'Year': {
+    impact: {
+      mealsRescued: 8610,
+      foodSavedKg: 3874.5,
+      co2eSavedKg: 9686,
+      revenueRecovered: 293100000,
+      waterSavedL: 215250,
+    },
+    wasteReductionPct: 29,
+    trend: [
+      { label: 'Jan', co2: 1080, revenue: 32.5, meals: 960 },
+      { label: 'Feb', co2: 2295, revenue: 69.5, meals: 2040 },
+      { label: 'Mar', co2: 3645, revenue: 110.5, meals: 3240 },
+      { label: 'Apr', co2: 5085, revenue: 154.5, meals: 4520 },
+      { label: 'May', co2: 6540, revenue: 198.5, meals: 5810 },
+      { label: 'Jun', co2: 8010, revenue: 242.5, meals: 7120 },
+      { label: 'Jul YTD', co2: 9686, revenue: 293.1, meals: 8610 },
+    ],
+    categoryBreakdown: [
+      { name: 'Pizza & Italian', count: 3702, pct: 43, color: 'bg-emerald-600', text: 'text-emerald-900' },
+      { name: 'Vietnamese Noodle', count: 2583, pct: 30, color: 'bg-teal-600', text: 'text-teal-900' },
+      { name: 'Japanese & Seafood', count: 1464, pct: 17, color: 'bg-amber-500', text: 'text-amber-900' },
+      { name: 'Healthy & Vegan', count: 861, pct: 10, color: 'bg-blue-600', text: 'text-blue-900' },
+    ],
+    monthlyComparison: [
+      { month: '2024 YTD', meals: 4100, co2: 4610, revenue: 140.0 },
+      { month: '2025 YTD', meals: 6300, co2: 7085, revenue: 215.0 },
+      { month: '2026 YTD', meals: 8610, co2: 9686, revenue: 293.1 },
+    ],
+  },
+};
+

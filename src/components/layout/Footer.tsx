@@ -12,7 +12,7 @@ export default function Footer() {
               <div className="w-8 h-8 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
                 <Leaf className="w-4 h-4" />
               </div>
-              <span className="font-bold text-lg text-white">EcoSave AI</span>
+              <span className="font-bold text-lg text-white">EcoSave</span>
             </div>
             <p className="text-xs text-emerald-200/70 max-w-sm leading-relaxed">
               AI-powered ESG platform enabling restaurants to forecast demand, eliminate food waste,
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-6 border-t border-emerald-900/60 flex flex-col sm:flex-row items-center justify-between text-xs text-emerald-400/80 gap-4">
-          <p>© 2026 EcoSave AI. All rights reserved.</p>
+          <p>© 2026 EcoSave. All rights reserved.</p>
           <div className="flex items-center gap-1">
             <span>Crafted with</span>
             <Heart className="w-3.5 h-3.5 text-amber-400 fill-amber-400 inline" />

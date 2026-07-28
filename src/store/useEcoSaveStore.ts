@@ -46,7 +46,7 @@ interface EcoSaveStore {
   acceptRecommendation: () => void;
   addListing: (listing: Listing) => void;
   reserveMeal: (listingId: string, quantity: number) => { success: boolean; pickupCode?: string; message?: string };
-  generateESGReport: (period: string) => ESGReport;
+  generateESGReport: (period: string, customMetrics?: ImpactRecord) => ESGReport;
   openForecastModal: () => void;
   closeForecastModal: () => void;
   runForecastSimulation: (customFactors?: Partial<ForecastFactors>) => void;
@@ -282,13 +282,13 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
         return { success: true, pickupCode };
       },
 
-      generateESGReport: (period: string) => {
+      generateESGReport: (period: string, customMetrics?: ImpactRecord) => {
         const state = get();
         const newReport: ESGReport = {
           id: `esg_${Date.now()}`,
           restaurantId: state.currentUser?.restaurantId || 'rest_pizza',
           period,
-          metrics: { ...state.impactRecord },
+          metrics: customMetrics ? { ...customMetrics } : { ...state.impactRecord },
           methodology: 'Calculated using 0.45 kg/meal weight factor and 2.5 kg CO2e/kg emission conversion.',
           generatedAt: new Date().toISOString().split('T')[0],
         };

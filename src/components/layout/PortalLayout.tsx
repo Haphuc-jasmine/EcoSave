@@ -50,7 +50,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
               <Leaf className="w-5 h-5" />
             </div>
             <div>
-              <span className="font-extrabold text-base text-white tracking-tight">EcoSave AI</span>
+              <span className="font-extrabold text-base text-white tracking-tight">EcoSave</span>
               <span className="block text-[10px] font-mono text-emerald-400">RESTAURANT PORTAL</span>
             </div>
           </Link>

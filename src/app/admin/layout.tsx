@@ -38,7 +38,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Leaf className="w-5 h-5" />
             </div>
             <div>
-              <span className="font-extrabold text-base text-white tracking-tight">EcoSave AI</span>
+              <span className="font-extrabold text-base text-white tracking-tight">EcoSave</span>
               <span className="block text-[10px] font-mono text-amber-400">ADMIN CONTROL PANEL</span>
             </div>
           </Link>

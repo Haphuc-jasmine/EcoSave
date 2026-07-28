@@ -29,7 +29,7 @@ export default function CustomerLayout({ children }: { children: React.ReactNode
                 <Leaf className="w-4 h-4 text-white" />
               </div>
               <div>
-                <span className="font-extrabold text-sm text-slate-900 tracking-tight">EcoSave AI</span>
+                <span className="font-extrabold text-sm text-slate-900 tracking-tight">EcoSave</span>
                 <span className="block text-[9px] font-mono text-emerald-600 leading-tight">CUSTOMER MARKETPLACE</span>
               </div>
             </Link>
@@ -93,7 +93,7 @@ export default function CustomerLayout({ children }: { children: React.ReactNode
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-4 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-600">
-          <span className="font-medium">© 2026 EcoSave AI — Fighting food waste, one meal at a time 🌱</span>
+          <span className="font-medium">© 2026 EcoSave — Fighting food waste, one meal at a time 🌱</span>
           <Link
             href="/"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 px-4 py-1.5 rounded-xl transition-all shadow-2xs"

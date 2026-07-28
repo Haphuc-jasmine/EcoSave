@@ -129,7 +129,7 @@ function LoginFormContent() {
               <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white">
                 <Leaf className="w-5 h-5" />
               </div>
-              <span className="font-extrabold text-lg text-white">EcoSave AI</span>
+              <span className="font-extrabold text-lg text-white">EcoSave</span>
             </Link>
 
             <span className="inline-flex items-center gap-1.5 bg-emerald-800/80 text-emerald-300 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full mb-4">
@@ -140,7 +140,7 @@ function LoginFormContent() {
               Role-Based Instant Portal Access
             </h2>
             <p className="text-xs text-emerald-200/80 leading-relaxed">
-              Experience EcoSave AI across restaurant operator, customer diner, and platform administrator viewpoints.
+              Experience EcoSave across restaurant operator, customer diner, and platform administrator viewpoints.
             </p>
           </div>
 
@@ -172,7 +172,7 @@ function LoginFormContent() {
 
         {/* Right Side: Form */}
         <div className="md:col-span-7 p-6 sm:p-8 flex flex-col justify-center">
-          <h3 className="text-xl font-bold text-slate-900 mb-1">Welcome to EcoSave AI</h3>
+          <h3 className="text-xl font-bold text-slate-900 mb-1">Welcome to EcoSave</h3>
           <p className="text-xs text-slate-500 mb-6">Select a demo role to inspect pre-seeded data</p>
 
           {/* Role Tabs */}

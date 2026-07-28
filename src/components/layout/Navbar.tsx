@@ -12,7 +12,7 @@ export default function Navbar() {
   const router = useRouter();
   const { currentUser, logout, resetDemo } = useEcoSaveStore();
   const mounted = useHasMounted();
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -50,11 +50,11 @@ export default function Navbar() {
             <Leaf className="w-5 h-5" />
           </div>
           <div>
-            <span className="font-extrabold text-xl tracking-tight text-slate-900 flex items-center gap-1">
-              EcoSave <span className="text-emerald-700">AI</span>
+            <span className="font-extrabold text-xl tracking-tight text-slate-900">
+              EcoSave
             </span>
             <span className="block text-[10px] uppercase tracking-wider font-semibold text-emerald-600 -mt-1">
-              ESG & Surplus Platform
+              {t('navTagline')}
             </span>
           </div>
         </Link>

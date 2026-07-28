@@ -51,6 +51,7 @@ interface EcoSaveStore {
   closeForecastModal: () => void;
   runForecastSimulation: (customFactors?: Partial<ForecastFactors>) => void;
   recordActualSales: (sales: number) => void;
+  updateRestaurant: (restaurantId: string, patch: Partial<Restaurant>) => void;
 }
 
 export const useEcoSaveStore = create<EcoSaveStore>()(
@@ -150,6 +151,14 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
 
       openForecastModal: () => set({ isForecastModalOpen: true }),
       closeForecastModal: () => set({ isForecastModalOpen: false }),
+
+      updateRestaurant: (restaurantId: string, patch: Partial<Restaurant>) => {
+        set((state) => ({
+          restaurants: state.restaurants.map((r) =>
+            r.id === restaurantId ? { ...r, ...patch } : r
+          ),
+        }));
+      },
 
       runForecastSimulation: (customFactors?: Partial<ForecastFactors>) => {
         const current = get().forecast;

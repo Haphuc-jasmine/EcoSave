@@ -25,7 +25,7 @@ const RESTAURANT_NAV = [
   { label: 'Surplus Meals', href: '/restaurant/surplus', icon: Package },
   { label: 'Marketplace Listings', href: '/restaurant/listings', icon: ShoppingBag },
   { label: 'ESG Dashboard', href: '/restaurant/esg', icon: BarChart3 },
-  { label: 'Profile & Settings', href: '/restaurant/profile', icon: Settings, badge: 'M9' },
+  { label: 'Profile & Settings', href: '/restaurant/profile', icon: Settings },
 ];
 
 export default function PortalLayout({ children }: { children: React.ReactNode }) {

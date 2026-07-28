@@ -19,7 +19,12 @@ import {
 import { useEcoSaveStore } from '@/store/useEcoSaveStore';
 import { useHasMounted } from '@/lib/useHasMounted';
 
-const RESTAURANT_NAV = [
+const RESTAURANT_NAV: Array<{
+  label: string;
+  href: string;
+  icon: React.ComponentType<any>;
+  badge?: string | number;
+}> = [
   { label: 'Dashboard', href: '/restaurant/dashboard', icon: LayoutDashboard },
   { label: 'AI Forecast', href: '/restaurant/forecast', icon: TrendingUp },
   { label: 'Surplus Meals', href: '/restaurant/surplus', icon: Package },

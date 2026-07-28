@@ -142,6 +142,8 @@ function Toggle({
 }
 
 /* ═══ Form (inner component – keyed by restaurantId for clean remount) ═══ */
+import { Restaurant } from '@/types';
+
 type FormState = {
   name: string;
   cuisine: string;
@@ -158,7 +160,7 @@ function ProfileForm({
   restaurantId,
   updateRestaurant,
 }: {
-  restaurant: NonNullable<ReturnType<typeof useEcoSaveStore>['restaurants'][number]> | undefined;
+  restaurant: Restaurant | undefined;
   restaurantId: string;
   updateRestaurant: (id: string, patch: Record<string, unknown>) => void;
 }) {

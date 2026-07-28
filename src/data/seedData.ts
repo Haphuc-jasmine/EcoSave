@@ -1,10 +1,11 @@
-import { User, Restaurant, Listing, ImpactRecord, ESGReport, Forecast } from '../types';
+import { User, Restaurant, Listing, ImpactRecord, ESGReport, Forecast, DailyOperation, Badge } from '../types';
 
 export const INITIAL_USERS: User[] = [
   {
     id: 'user_pizza',
     name: 'Pizza House',
     username: 'pizza',
+    email: 'contact@pizzahouse.vn',
     role: 'restaurant',
     restaurantId: 'rest_pizza',
     avatar: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150&auto=format&fit=crop&q=80',
@@ -13,6 +14,7 @@ export const INITIAL_USERS: User[] = [
     id: 'user_phobo',
     name: 'Pho Bo 24',
     username: 'phobo',
+    email: 'info@phobo24.vn',
     role: 'restaurant',
     restaurantId: 'rest_phobo',
     avatar: 'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=150&auto=format&fit=crop&q=80',
@@ -21,6 +23,7 @@ export const INITIAL_USERS: User[] = [
     id: 'user_sushi',
     name: 'Sakura Sushi',
     username: 'sushi',
+    email: 'support@sakurasushi.vn',
     role: 'restaurant',
     restaurantId: 'rest_sushi',
     avatar: 'https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=150&auto=format&fit=crop&q=80',
@@ -29,6 +32,7 @@ export const INITIAL_USERS: User[] = [
     id: 'user_customer',
     name: 'Phuc Nguyen',
     username: 'phuc',
+    email: 'phuc.nguyen@example.com',
     role: 'customer',
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
   },
@@ -36,6 +40,7 @@ export const INITIAL_USERS: User[] = [
     id: 'user_admin',
     name: 'EcoSave Admin',
     username: 'admin',
+    email: 'admin@ecosave.ai',
     role: 'admin',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
   },
@@ -51,6 +56,12 @@ export const INITIAL_RESTAURANTS: Restaurant[] = [
     badge: 'Green Hero',
     openingHours: '10:00 AM - 10:00 PM',
     co2FactorProfile: 'Standard Mixed Meals (2.5 kg CO2e/kg)',
+    settings: {
+      autoPublishSurplus: true,
+      defaultDiscountPct: 40,
+      notificationEmail: 'alerts@pizzahouse.vn',
+      autoAcceptRecommendations: true,
+    },
   },
   {
     id: 'rest_phobo',
@@ -61,6 +72,12 @@ export const INITIAL_RESTAURANTS: Restaurant[] = [
     badge: 'Planet Champion',
     openingHours: '06:00 AM - 11:00 PM',
     co2FactorProfile: 'Noodle & Broth (2.2 kg CO2e/kg)',
+    settings: {
+      autoPublishSurplus: true,
+      defaultDiscountPct: 45,
+      notificationEmail: 'manager@phobo24.vn',
+      autoAcceptRecommendations: true,
+    },
   },
   {
     id: 'rest_sushi',
@@ -71,6 +88,12 @@ export const INITIAL_RESTAURANTS: Restaurant[] = [
     badge: 'Green Starter',
     openingHours: '11:00 AM - 10:00 PM',
     co2FactorProfile: 'Seafood & Rice (2.8 kg CO2e/kg)',
+    settings: {
+      autoPublishSurplus: false,
+      defaultDiscountPct: 35,
+      notificationEmail: 'chef@sakurasushi.vn',
+      autoAcceptRecommendations: false,
+    },
   },
   {
     id: 'rest_greenbowl',
@@ -81,6 +104,71 @@ export const INITIAL_RESTAURANTS: Restaurant[] = [
     badge: 'Green Hero',
     openingHours: '08:00 AM - 09:00 PM',
     co2FactorProfile: 'Plant-Based (1.5 kg CO2e/kg)',
+    settings: {
+      autoPublishSurplus: true,
+      defaultDiscountPct: 40,
+      notificationEmail: 'hello@greenbowl.vn',
+      autoAcceptRecommendations: true,
+    },
+  },
+];
+
+export const INITIAL_DAILY_OPERATIONS: DailyOperation[] = [
+  {
+    date: '2026-07-26',
+    preparedQty: 115,
+    actualSold: 103,
+    surplusQty: 12,
+    recommendedPrep: 115,
+  },
+  {
+    date: '2026-07-25',
+    preparedQty: 128,
+    actualSold: 121,
+    surplusQty: 7,
+    recommendedPrep: 125,
+  },
+  {
+    date: '2026-07-24',
+    preparedQty: 120,
+    actualSold: 115,
+    surplusQty: 5,
+    recommendedPrep: 118,
+  },
+  {
+    date: '2026-07-23',
+    preparedQty: 115,
+    actualSold: 104,
+    surplusQty: 11,
+    recommendedPrep: 110,
+  },
+  {
+    date: '2026-07-22',
+    preparedQty: 110,
+    actualSold: 108,
+    surplusQty: 2,
+    recommendedPrep: 105,
+  },
+];
+
+export const INITIAL_BADGES: Badge[] = [
+  {
+    name: 'Green Starter',
+    tier: 'Green Starter',
+    threshold: 100,
+    progress: 100,
+  },
+  {
+    name: 'Green Hero',
+    tier: 'Green Hero',
+    threshold: 500,
+    progress: 500,
+  },
+  {
+    name: 'Planet Champion',
+    tier: 'Planet Champion',
+    threshold: 1500,
+    progress: 1820,
   },
 ];
 

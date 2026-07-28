@@ -9,6 +9,8 @@ import {
   ESGReport,
   Forecast,
   ForecastFactors,
+  DailyOperation,
+  Badge,
 } from '../types';
 import {
   INITIAL_USERS,
@@ -17,6 +19,8 @@ import {
   INITIAL_IMPACT,
   INITIAL_FORECAST,
   INITIAL_ESG_REPORTS,
+  INITIAL_DAILY_OPERATIONS,
+  INITIAL_BADGES,
 } from '../data/seedData';
 
 interface EcoSaveStore {
@@ -28,6 +32,8 @@ interface EcoSaveStore {
   impactRecord: ImpactRecord;
   esgReports: ESGReport[];
   forecast: Forecast;
+  dailyOperations: DailyOperation[];
+  badges: Badge[];
   recommendationAccepted: boolean;
   preparationTarget: number;
   isForecastModalOpen: boolean;
@@ -93,6 +99,8 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
       impactRecord: INITIAL_IMPACT,
       esgReports: INITIAL_ESG_REPORTS,
       forecast: INITIAL_FORECAST,
+      dailyOperations: INITIAL_DAILY_OPERATIONS,
+      badges: INITIAL_BADGES,
       recommendationAccepted: false,
       preparationTarget: INITIAL_FORECAST.predictedDemand,
       isForecastModalOpen: false,
@@ -123,6 +131,8 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
           impactRecord: INITIAL_IMPACT,
           esgReports: INITIAL_ESG_REPORTS,
           forecast: INITIAL_FORECAST,
+          dailyOperations: INITIAL_DAILY_OPERATIONS,
+          badges: INITIAL_BADGES,
           recommendationAccepted: false,
           preparationTarget: INITIAL_FORECAST.predictedDemand,
           isForecastModalOpen: false,
@@ -148,19 +158,25 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
           ...customFactors,
         };
 
-        // Deterministic forecast calculation per Blueprint formula:
-        // predictedDemand = recentAverage (120) * weekday * weather * event * trend * promotion
+        // Deterministic forecast calculation per Blueprint §7.2 formula:
+        // predictedDemand = recentAverage (120) * weekdayFactor * weatherFactor * eventFactor * promotionFactor
         const baseAvg = 120;
         const predicted = Math.round(
           baseAvg *
             updatedFactors.weekdayFactor *
             updatedFactors.weatherFactor *
             updatedFactors.eventFactor *
-            updatedFactors.historicalTrendFactor *
             updatedFactors.promotionFactor
         );
 
-        const confidence = Math.min(92, Math.max(78, Math.round(75 + Math.random() * 14)));
+        // Confidence derived from factor variance in range 78–92% per Blueprint §7.2
+        const factorSum =
+          updatedFactors.weekdayFactor +
+          updatedFactors.weatherFactor +
+          updatedFactors.eventFactor +
+          updatedFactors.promotionFactor;
+        const confidence = Math.min(92, Math.max(78, Math.round(78 + (factorSum % 0.15) * 100)));
+        
         const lowerBound = Math.round(predicted * 0.92);
         const upperBound = Math.round(predicted * 1.08);
 
@@ -181,7 +197,22 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
       },
 
       recordActualSales: (sales: number) => {
-        set({ actualSalesToday: sales });
+        const prep = get().preparationTarget;
+        // Blueprint §7.3: surplusQty = max(preparedQty - actualSold, 0)
+        const surplusQty = Math.max(0, prep - sales);
+
+        const todayOp: DailyOperation = {
+          date: new Date().toISOString().split('T')[0],
+          preparedQty: prep,
+          actualSold: sales,
+          surplusQty,
+          recommendedPrep: get().forecast.recommendedPrep,
+        };
+
+        set((state) => ({
+          actualSalesToday: sales,
+          dailyOperations: [todayOp, ...state.dailyOperations.filter((d) => d.date !== todayOp.date)],
+        }));
       },
 
       addListing: (newListing: Listing) => {

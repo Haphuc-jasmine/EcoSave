@@ -4,9 +4,17 @@ export interface User {
   id: string;
   name: string;
   username: string;
+  email?: string;
   role: UserRole;
   avatar?: string;
   restaurantId?: string;
+}
+
+export interface RestaurantSettings {
+  autoPublishSurplus: boolean;
+  defaultDiscountPct: number;
+  notificationEmail: string;
+  autoAcceptRecommendations: boolean;
 }
 
 export interface Restaurant {
@@ -22,6 +30,7 @@ export interface Restaurant {
   logoUrl?: string;
   openingHours?: string;
   co2FactorProfile?: string;
+  settings?: RestaurantSettings;
 }
 
 export interface Meal {

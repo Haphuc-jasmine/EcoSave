@@ -324,6 +324,11 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
     }),
     {
       name: 'ecosave-storage',
+      version: 2,
+      migrate: () => {
+        // Reset to fresh seed data on version bump
+        return undefined;
+      },
     }
   )
 );

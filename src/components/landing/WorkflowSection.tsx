@@ -50,18 +50,18 @@ export default function WorkflowSection() {
     <section
       id="how-it-works"
       ref={sectionRef}
-      className="py-14 bg-white border-y border-slate-100"
+      className="pt-6 pb-12 bg-white border-y border-slate-100"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className={`text-center max-w-2xl mx-auto mb-10 transition-all duration-700 ease-out ${
+          className={`text-center max-w-2xl mx-auto mb-6 transition-all duration-700 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}
         >
-          <h2 className="text-[11px] font-bold uppercase tracking-widest text-emerald-700 mb-1.5">
+          <h2 className="text-[11px] font-bold uppercase tracking-widest text-emerald-700 mb-0.5">
             {t('workflowBadge')}
           </h2>
-          <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
             {t('workflowTitle')}
           </p>
         </div>

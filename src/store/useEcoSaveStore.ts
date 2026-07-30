@@ -45,7 +45,7 @@ interface EcoSaveStore {
   resetDemo: () => void;
   acceptRecommendation: () => void;
   addListing: (listing: Listing) => void;
-  reserveMeal: (listingId: string, quantity: number) => { success: boolean; pickupCode?: string; message?: string };
+  reserveMeal: (listingId: string, quantity: number, fulfillmentType: 'pickup' | 'delivery', deliveryAddress?: string) => { success: boolean; pickupCode?: string; message?: string };
   generateESGReport: (period: string, customMetrics?: ImpactRecord) => ESGReport;
   openForecastModal: () => void;
   closeForecastModal: () => void;
@@ -74,6 +74,7 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
           total: 190000,
           pickupCode: 'ECO-8492',
           status: 'reserved',
+          fulfillmentType: 'pickup' as const,
           createdAt: new Date(Date.now() - 25 * 60000).toISOString(),
           expiresAt: '1h 15m',
           savedVnd: 170000,
@@ -91,6 +92,7 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
           total: 95000,
           pickupCode: 'ECO-3104',
           status: 'completed',
+          fulfillmentType: 'pickup' as const,
           createdAt: new Date(Date.now() - 110 * 60000).toISOString(),
           expiresAt: 'Expired',
           savedVnd: 85000,
@@ -239,7 +241,7 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
         }));
       },
 
-      reserveMeal: (listingId: string, quantity: number) => {
+      reserveMeal: (listingId: string, quantity: number, fulfillmentType: 'pickup' | 'delivery', deliveryAddress?: string) => {
         const state = get();
         const listing = state.listings.find((l) => l.id === listingId);
         if (!listing || listing.quantity < quantity || listing.status !== 'active') {
@@ -264,6 +266,8 @@ export const useEcoSaveStore = create<EcoSaveStore>()(
           total,
           pickupCode,
           status: 'reserved',
+          fulfillmentType,
+          deliveryAddress: fulfillmentType === 'delivery' ? deliveryAddress : undefined,
           createdAt: new Date().toISOString(),
           expiresAt: listing.expiresAt,
           savedVnd,

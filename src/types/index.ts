@@ -104,6 +104,8 @@ export interface Order {
   total: number;
   pickupCode: string;
   status: 'reserved' | 'completed' | 'cancelled';
+  fulfillmentType: 'pickup' | 'delivery';
+  deliveryAddress?: string;
   createdAt: string;
   expiresAt: string;
   savedVnd: number;

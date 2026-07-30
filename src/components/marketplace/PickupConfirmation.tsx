@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { CheckCircle2, Leaf, Banknote, Clock, ShoppingBag, QrCode } from 'lucide-react';
+import { CheckCircle2, Leaf, Banknote, Clock, ShoppingBag, QrCode, Truck, MapPin } from 'lucide-react';
 
 interface PickupConfirmationProps {
   pickupCode: string;
@@ -12,6 +12,8 @@ interface PickupConfirmationProps {
   totalPaid: number;
   savedVnd: number;
   co2SavedKg: number;
+  fulfillmentType: 'pickup' | 'delivery';
+  deliveryAddress?: string;
   onClose: () => void;
 }
 
@@ -24,8 +26,12 @@ export default function PickupConfirmation({
   totalPaid,
   savedVnd,
   co2SavedKg,
+  fulfillmentType,
+  deliveryAddress,
   onClose,
 }: PickupConfirmationProps) {
+  const isDelivery = fulfillmentType === 'delivery';
+
   return (
     <div
       className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4"
@@ -33,36 +39,57 @@ export default function PickupConfirmation({
     >
       <div className="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
         {/* Success Header */}
-        <div className="bg-gradient-to-br from-emerald-900 to-teal-950 p-6 text-center">
-          <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 mx-auto flex items-center justify-center mb-3">
-            <CheckCircle2 className="w-7 h-7 text-emerald-300" />
+        <div className={`p-6 text-center ${isDelivery ? 'bg-gradient-to-br from-blue-900 to-slate-900' : 'bg-gradient-to-br from-emerald-900 to-teal-950'}`}>
+          <div className={`w-14 h-14 rounded-2xl mx-auto flex items-center justify-center mb-3 border ${isDelivery ? 'bg-blue-500/20 border-blue-400/30' : 'bg-emerald-500/20 border-emerald-400/30'}`}>
+            {isDelivery ? (
+              <Truck className="w-7 h-7 text-blue-300" />
+            ) : (
+              <CheckCircle2 className="w-7 h-7 text-emerald-300" />
+            )}
           </div>
-          <div className="text-xs font-bold uppercase tracking-widest text-amber-300 mb-1">
-            Reservation Confirmed!
+          <div className={`text-xs font-bold uppercase tracking-widest mb-1 ${isDelivery ? 'text-blue-300' : 'text-amber-300'}`}>
+            {isDelivery ? 'Delivery Order Placed!' : 'Reservation Confirmed!'}
           </div>
           <h2 className="text-xl font-extrabold text-white">{mealName}</h2>
-          <p className="text-sm text-emerald-200/70 mt-1">{restaurantName}</p>
+          <p className="text-sm text-white/60 mt-1">{restaurantName}</p>
         </div>
 
-        {/* Pickup Code */}
+        {/* Code / Delivery info */}
         <div className="px-6 py-5">
-          <div className="bg-slate-50 border-2 border-dashed border-emerald-400 rounded-2xl p-5 text-center mb-5">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <QrCode className="w-4 h-4 text-slate-400" />
-              <span className="text-xs font-bold uppercase tracking-widest text-slate-500">
-                Your Pickup Code
-              </span>
+          {isDelivery ? (
+            /* Delivery confirmation box */
+            <div className="bg-blue-50 border-2 border-dashed border-blue-400 rounded-2xl p-5 text-center mb-5">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Truck className="w-4 h-4 text-blue-500" />
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-700">
+                  Delivery Confirmed
+                </span>
+              </div>
+              <div id="pickup-code-display" className="text-2xl font-extrabold tracking-widest text-blue-800 font-mono my-2">
+                {pickupCode}
+              </div>
+              <p className="text-[11px] text-slate-500">Reference code — share with driver on arrival</p>
             </div>
-            <div
-              id="pickup-code-display"
-              className="text-4xl font-extrabold tracking-widest text-emerald-800 font-mono my-2"
-            >
-              {pickupCode}
+          ) : (
+            /* Pickup code box */
+            <div className="bg-slate-50 border-2 border-dashed border-emerald-400 rounded-2xl p-5 text-center mb-5">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <QrCode className="w-4 h-4 text-slate-400" />
+                <span className="text-xs font-bold uppercase tracking-widest text-slate-500">
+                  Your Pickup Code
+                </span>
+              </div>
+              <div
+                id="pickup-code-display"
+                className="text-4xl font-extrabold tracking-widest text-emerald-800 font-mono my-2"
+              >
+                {pickupCode}
+              </div>
+              <p className="text-[11px] text-slate-400">Show this code at the restaurant counter</p>
             </div>
-            <p className="text-[11px] text-slate-400">Show this code at the restaurant counter</p>
-          </div>
+          )}
 
-          {/* Pickup Details */}
+          {/* Details */}
           <div className="space-y-3 mb-5">
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-2 text-slate-600">
@@ -70,17 +97,38 @@ export default function PickupConfirmation({
               </span>
               <span className="font-bold text-slate-900">{quantity} portion{quantity > 1 ? 's' : ''}</span>
             </div>
+
+            {isDelivery ? (
+              <>
+                <div className="flex items-start justify-between text-sm">
+                  <span className="flex items-center gap-2 text-slate-600 shrink-0">
+                    <MapPin className="w-4 h-4 text-slate-400" /> Deliver to
+                  </span>
+                  <span className="font-bold text-slate-900 text-right ml-4">{deliveryAddress}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="flex items-center gap-2 text-slate-600">
+                    <Clock className="w-4 h-4 text-slate-400" /> ETA
+                  </span>
+                  <span className="font-bold text-slate-900">30–45 min after {pickupWindow}</span>
+                </div>
+              </>
+            ) : (
+              <div className="flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2 text-slate-600">
+                  <Clock className="w-4 h-4 text-slate-400" /> Pickup Window
+                </span>
+                <span className="font-bold text-slate-900">{pickupWindow}</span>
+              </div>
+            )}
+
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-2 text-slate-600">
-                <Clock className="w-4 h-4 text-slate-400" /> Pickup Window
+                <Banknote className="w-4 h-4 text-slate-400" /> Total {isDelivery ? 'Charged' : 'Paid'}
               </span>
-              <span className="font-bold text-slate-900">{pickupWindow}</span>
-            </div>
-            <div className="flex items-center justify-between text-sm">
-              <span className="flex items-center gap-2 text-slate-600">
-                <Banknote className="w-4 h-4 text-slate-400" /> Total Paid
+              <span className={`font-bold ${isDelivery ? 'text-blue-700' : 'text-emerald-700'}`}>
+                {totalPaid.toLocaleString()} đ
               </span>
-              <span className="font-bold text-emerald-700">{totalPaid.toLocaleString()} đ</span>
             </div>
           </div>
 
@@ -115,7 +163,9 @@ export default function PickupConfirmation({
           <button
             id="close-confirmation-btn"
             onClick={onClose}
-            className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-sm py-3.5 rounded-2xl transition-all hover:scale-[1.01]"
+            className={`w-full text-white font-bold text-sm py-3.5 rounded-2xl transition-all hover:scale-[1.01] ${
+              isDelivery ? 'bg-blue-600 hover:bg-blue-700' : 'bg-emerald-700 hover:bg-emerald-800'
+            }`}
           >
             Done — Back to Marketplace
           </button>

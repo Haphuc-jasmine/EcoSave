@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PortalLayout from '@/components/layout/PortalLayout';
 import KpiCards from '@/components/dashboard/KpiCards';
 import AiRecommendationCard from '@/components/dashboard/AiRecommendationCard';
@@ -11,6 +11,26 @@ import EnvironmentalMiniCard from '@/components/dashboard/EnvironmentalMiniCard'
 import ForecastSimulationModal from '@/components/forecast/ForecastSimulationModal';
 
 export default function RestaurantDashboardPage() {
+  const [now, setNow] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setNow(new Date());
+    const interval = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const dateLabel = now?.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+  const timeLabel = now?.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    second: '2-digit',
+  });
+
   return (
     <PortalLayout>
       <div className="space-y-6 max-w-7xl mx-auto pb-12">
@@ -24,7 +44,7 @@ export default function RestaurantDashboardPage() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-3 py-1.5 rounded-xl">
-              📅 Sunday, July 26, 2026
+              📅 {dateLabel ?? ' '} · {timeLabel ?? ' '}
             </span>
           </div>
         </div>

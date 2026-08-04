@@ -299,17 +299,17 @@ function ReportModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="sticky top-0 bg-white border-b border-slate-100 rounded-t-3xl px-6 pt-5 pb-4 flex items-center justify-between z-10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-100 border border-emerald-300 flex items-center justify-center">
+        <div className="sticky top-0 bg-white border-b border-slate-100 rounded-t-3xl px-4 sm:px-6 pt-5 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 z-10">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0">
               <FileText className="w-5 h-5 text-emerald-700" />
             </div>
-            <div>
+            <div className="min-w-0">
               <h2 className="text-base font-extrabold text-slate-900">ESG Compliance Report</h2>
-              <p className="text-xs text-slate-500 font-medium">{period} · Generated {generatedAt}</p>
+              <p className="text-xs text-slate-500 font-medium truncate">{period} · Generated {generatedAt}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handlePrint}
               className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-xl transition-all"
@@ -324,7 +324,7 @@ function ReportModal({
             </button>
             <button
               onClick={onClose}
-              className="w-8 h-8 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 transition-all"
+              className="w-8 h-8 flex items-center justify-center rounded-xl bg-slate-100 hover:bg-slate-200 transition-all shrink-0"
             >
               <X className="w-4 h-4 text-slate-500" />
             </button>
@@ -332,13 +332,13 @@ function ReportModal({
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 space-y-6" id="esg-report-print-area">
+        <div className="p-4 sm:p-6 space-y-6" id="esg-report-print-area">
           {/* Title block */}
           <div className="text-center pb-4 border-b border-slate-100">
             <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full mb-3">
               <CheckCircle2 className="w-3.5 h-3.5" /> GHG Protocol Verified
             </div>
-            <h3 className="text-xl font-black text-slate-900 mb-1">Environmental, Social &amp; Governance Report</h3>
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-1">Environmental, Social &amp; Governance Report</h3>
             <p className="text-sm text-slate-500 font-medium">Reporting Period: <strong className="text-slate-800">{period}</strong></p>
           </div>
 
@@ -512,15 +512,15 @@ export default function RestaurantESGPage() {
           </div>
 
           {/* Period Tabs + CTA */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 w-full sm:w-auto">
             {/* Pill Period Selector */}
-            <div className="flex items-center bg-slate-100 border border-slate-200 rounded-2xl p-1 gap-0.5">
+            <div className="flex items-center bg-slate-100 border border-slate-200 rounded-2xl p-1 gap-0.5 overflow-x-auto w-full sm:w-auto">
               {(['Week', 'Month', 'Quarter', 'Year'] as PeriodKey[]).map((p) => (
                 <button
                   key={p}
                   id={`period-tab-${p.toLowerCase()}`}
                   onClick={() => setSelectedPeriod(p)}
-                  className={`px-3 py-1.5 text-xs font-bold rounded-xl transition-all ${
+                  className={`flex-1 sm:flex-none px-3 py-1.5 text-xs font-bold rounded-xl transition-all whitespace-nowrap ${
                     selectedPeriod === p
                       ? 'bg-white text-emerald-800 shadow-sm border border-slate-200'
                       : 'text-slate-500 hover:text-slate-800'
@@ -535,7 +535,7 @@ export default function RestaurantESGPage() {
               id="generate-esg-report-btn"
               onClick={handleGenerate}
               disabled={isGenerating}
-              className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md shadow-emerald-700/20 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md shadow-emerald-700/20 disabled:opacity-50 w-full sm:w-auto min-h-[44px] sm:min-h-0"
             >
               {isGenerating ? (
                 <>
@@ -563,7 +563,7 @@ export default function RestaurantESGPage() {
 
         {/* ── TOAST ───────────────────────────────────────────────────── */}
         {showToast && (
-          <div className="p-4 bg-emerald-900 text-white rounded-2xl flex items-center justify-between border border-emerald-700 shadow-lg">
+          <div className="p-4 bg-emerald-900 text-white rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-emerald-700 shadow-lg">
             <div className="flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-300 shrink-0" />
               <span className="text-xs font-semibold">
@@ -576,7 +576,7 @@ export default function RestaurantESGPage() {
                 </button>
               </span>
             </div>
-            <button onClick={() => setShowToast(false)} className="text-xs text-emerald-300 hover:underline ml-4 shrink-0">Dismiss</button>
+            <button onClick={() => setShowToast(false)} className="text-xs text-emerald-300 hover:underline sm:ml-4 shrink-0 self-end sm:self-auto">Dismiss</button>
           </div>
         )}
 
@@ -588,7 +588,7 @@ export default function RestaurantESGPage() {
               <div
                 key={kpi.id}
                 id={kpi.id}
-                className={`bg-gradient-to-b ${kpi.gradient} rounded-3xl p-5 border ${kpi.border} shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col min-h-[160px]`}
+                className={`bg-gradient-to-b ${kpi.gradient} rounded-3xl p-4 sm:p-5 border ${kpi.border} shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col min-h-[160px]`}
               >
                 {/* Header: label + icon */}
                 <div className="flex items-start justify-between mb-auto">
@@ -622,15 +622,15 @@ export default function RestaurantESGPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
 
           {/* ESG Trend Line Chart (7 cols) */}
-          <div className="lg:col-span-7 bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-            <div className="flex items-center justify-between mb-1 pb-3 border-b border-slate-100">
+          <div className="lg:col-span-7 bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-1 pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-emerald-700" />
                 <h3 className="text-sm font-extrabold text-slate-900">ESG Impact Trend</h3>
               </div>
-              <div className="flex items-center gap-4 text-[11px] font-bold text-slate-600">
-                <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block" /> CO₂ Prevented</span>
-                <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-600 inline-block" /> Revenue (M VND)</span>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-[11px] font-bold text-slate-600">
+                <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-emerald-600 inline-block shrink-0" /> CO₂ Prevented</span>
+                <span className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full bg-amber-600 inline-block shrink-0" /> Revenue (M VND)</span>
               </div>
             </div>
             <div className="h-52 w-full pt-2">
@@ -639,7 +639,7 @@ export default function RestaurantESGPage() {
           </div>
 
           {/* Impact Breakdown by Category (5 cols) */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col">
+          <div className="lg:col-span-5 bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm flex flex-col">
             <div className="flex items-center justify-between mb-3 pb-3 border-b border-slate-100">
               <div className="flex items-center gap-2">
                 <BarChart3 className="w-4 h-4 text-teal-700" />
@@ -673,8 +673,8 @@ export default function RestaurantESGPage() {
         </div>
 
         {/* ── MONTHLY ESG COMPARISON ──────────────────────────────────── */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+        <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
             <div className="flex items-center gap-2">
               <BarChart3 className="w-4 h-4 text-amber-600" />
               <h3 className="text-sm font-extrabold text-slate-900">ESG Comparison — Period Over Period</h3>
@@ -753,29 +753,29 @@ export default function RestaurantESGPage() {
 
         {/* ── GENERATED REPORTS HISTORY ───────────────────────────────── */}
         <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="px-4 sm:px-6 py-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50/50">
             <div className="flex items-center gap-2">
               <FileText className="w-4 h-4 text-slate-600" />
               <h3 className="text-sm font-extrabold text-slate-900">Generated ESG Compliance Reports</h3>
             </div>
-            <span className="text-xs font-bold text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold text-slate-500 bg-white border border-slate-200 px-3 py-1 rounded-full self-start sm:self-auto">
               {mounted ? esgReports.length : 0} report(s)
             </span>
           </div>
 
           <div className="divide-y divide-slate-100">
             {mounted && esgReports.length === 0 && (
-              <div className="px-6 py-8 text-center text-xs text-slate-400 font-semibold">
+              <div className="px-4 sm:px-6 py-8 text-center text-xs text-slate-400 font-semibold">
                 No reports yet. Generate your first ESG report using the button above.
               </div>
             )}
             {mounted && esgReports.map((report) => (
-              <div key={report.id} className="px-6 py-4 flex items-center justify-between gap-4 hover:bg-slate-50/60 transition-colors">
-                <div className="flex items-center gap-3">
+              <div key={report.id} className="px-4 sm:px-6 py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50/60 transition-colors">
+                <div className="flex items-center gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center shrink-0">
                     <FileText className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="text-sm font-bold text-slate-900">{report.period} ESG Report</div>
                     <div className="flex items-center gap-2 text-[11px] text-slate-500 mt-0.5 flex-wrap">
                       <span className="flex items-center gap-1">
@@ -796,14 +796,14 @@ export default function RestaurantESGPage() {
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={() => setPreviewReport(report)}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 px-3 py-2 rounded-xl transition-all"
+                    className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 px-3 py-2 rounded-xl transition-all flex-1 sm:flex-none"
                   >
                     <FlaskConical className="w-3.5 h-3.5" />
                     Preview
                   </button>
                   <button
                     onClick={() => alert(`PDF download for "${report.period} ESG Report" — mock trigger. In production, this would call a server-side PDF generation endpoint.`)}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-xl transition-all"
+                    className="inline-flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-2 rounded-xl transition-all flex-1 sm:flex-none"
                   >
                     <Download className="w-3.5 h-3.5 text-slate-500" />
                     PDF
@@ -815,7 +815,7 @@ export default function RestaurantESGPage() {
         </div>
 
         {/* ── CALCULATION METHODOLOGY (bottom) ────────────────────────── */}
-        <div className="bg-gradient-to-r from-slate-900 to-emerald-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-800">
+        <div className="bg-gradient-to-r from-slate-900 to-emerald-950 text-white rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl border border-slate-800">
           <div className="flex items-center gap-2 text-emerald-400 text-xs font-extrabold uppercase tracking-wider mb-3">
             <CheckCircle2 className="w-4 h-4" /> GHG Protocol &amp; Audit Standard
           </div>

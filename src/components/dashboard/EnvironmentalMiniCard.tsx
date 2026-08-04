@@ -12,7 +12,7 @@ export default function EnvironmentalMiniCard() {
   const water = impactRecord.waterSavedL;
 
   return (
-    <div className="bg-gradient-to-br from-emerald-900 to-teal-950 text-white rounded-3xl p-6 shadow-md border border-emerald-800">
+    <div className="bg-gradient-to-br from-emerald-900 to-teal-950 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-md border border-emerald-800">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-xl bg-emerald-700 flex items-center justify-center text-emerald-300">

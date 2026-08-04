@@ -127,72 +127,77 @@ export default function RestaurantListingsPage() {
               {mounted && myListings.map((listing) => {
                 return (
                   <div
-                    key={listing.id}
-                    className="px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 hover:bg-slate-50/60 transition-colors"
+    key={listing.id}
+                    className="px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-4 hover:bg-slate-50/60 transition-colors"
                   >
-                    {/* Image */}
-                    <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-slate-100">
-                      <img
-                        src={listing.image}
-                        alt={listing.mealName}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+                    {/* Image + Info (mobile row) */}
+                    <div className="flex items-start sm:items-center gap-4 w-full sm:w-auto sm:flex-1 min-w-0">
+                      <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-slate-100">
+                        <img
+                          src={listing.image}
+                          alt={listing.mealName}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
 
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-sm font-bold text-slate-900 truncate">
-                          {listing.mealName}
-                        </span>
-                        <StatusBadge status={listing.status} />
-                      </div>
-                      <div className="flex items-center gap-3 mt-1 text-[11px] text-slate-500 flex-wrap">
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" /> {listing.pickupWindow}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Star className="w-3 h-3 text-amber-400" /> {listing.rating}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Leaf className="w-3 h-3 text-emerald-500" />{' '}
-                          {listing.dietaryTags.slice(0, 2).join(', ')}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Pricing */}
-                    <div className="text-right shrink-0">
-                      <div className="text-sm font-extrabold text-emerald-700">
-                        {listing.salePrice.toLocaleString()} đ
-                      </div>
-                      <div className="text-[11px] text-slate-400 line-through">
-                        {listing.originalPrice.toLocaleString()} đ
-                      </div>
-                      <div className="text-[10px] font-bold text-red-600 bg-red-50 rounded px-1 mt-0.5">
-                        -{listing.discount}%
+                      {/* Info */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-sm font-bold text-slate-900 truncate">
+                            {listing.mealName}
+                          </span>
+                          <StatusBadge status={listing.status} />
+                        </div>
+                        <div className="flex items-center gap-3 mt-1 text-[11px] text-slate-500 flex-wrap">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3" /> {listing.pickupWindow}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Star className="w-3 h-3 text-amber-400" /> {listing.rating}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Leaf className="w-3 h-3 text-emerald-500" />{' '}
+                            {listing.dietaryTags.slice(0, 2).join(', ')}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    {/* Qty */}
-                    <div className="text-center shrink-0 w-16">
-                      <div
-                        className={`text-lg font-extrabold ${
-                          listing.quantity === 0 ? 'text-slate-400' : 'text-slate-900'
-                        }`}
-                      >
-                        {listing.quantity}
+                    {/* Pricing / Qty / Revenue (mobile row) */}
+                    <div className="flex items-center justify-between w-full sm:w-auto gap-4">
+                      {/* Pricing */}
+                      <div className="text-left sm:text-right shrink-0">
+                        <div className="text-sm font-extrabold text-emerald-700">
+                          {listing.salePrice.toLocaleString()} đ
+                        </div>
+                        <div className="text-[11px] text-slate-400 line-through">
+                          {listing.originalPrice.toLocaleString()} đ
+                        </div>
+                        <div className="text-[10px] font-bold text-red-600 bg-red-50 rounded px-1 mt-0.5 inline-block">
+                          -{listing.discount}%
+                        </div>
                       </div>
-                      <div className="text-[10px] text-slate-400">left</div>
-                    </div>
 
-                    {/* Revenue potential */}
-                    <div className="text-right shrink-0">
-                      <div className="text-xs font-bold text-teal-700 flex items-center gap-1 justify-end">
-                        <Banknote className="w-3.5 h-3.5" />
-                        {(listing.salePrice * listing.quantity).toLocaleString()} đ
+                      {/* Qty */}
+                      <div className="text-center shrink-0 w-16">
+                        <div
+                          className={`text-lg font-extrabold ${
+                            listing.quantity === 0 ? 'text-slate-400' : 'text-slate-900'
+                          }`}
+                        >
+                          {listing.quantity}
+                        </div>
+                        <div className="text-[10px] text-slate-400">left</div>
                       </div>
-                      <div className="text-[10px] text-slate-400">recoverable</div>
+
+                      {/* Revenue potential */}
+                      <div className="text-right shrink-0">
+                        <div className="text-xs font-bold text-teal-700 flex items-center gap-1 justify-end">
+                          <Banknote className="w-3.5 h-3.5" />
+                          {(listing.salePrice * listing.quantity).toLocaleString()} đ
+                        </div>
+                        <div className="text-[10px] text-slate-400">recoverable</div>
+                      </div>
                     </div>
                   </div>
                 );

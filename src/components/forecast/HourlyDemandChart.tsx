@@ -38,26 +38,26 @@ export default function HourlyDemandChart() {
   const mainPath = chartData.map((d, i) => `${getX(i)},${getY(d.val)}`).join(' ');
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
           <h3 className="text-base font-bold text-slate-900">Hourly Demand Curve & Confidence Band</h3>
           <p className="text-xs text-slate-500">Shaded area represents 86% statistical confidence bounds</p>
         </div>
-        <div className="flex items-center gap-3 text-xs font-semibold">
+        <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
           <span className="flex items-center gap-1 text-emerald-700">
-            <span className="w-3 h-3 bg-emerald-200 border border-emerald-400 rounded" />
+            <span className="w-3 h-3 bg-emerald-200 border border-emerald-400 rounded shrink-0" />
             <span>Confidence Range ({lowerBound}–{upperBound})</span>
           </span>
           <span className="flex items-center gap-1 text-slate-800">
-            <span className="w-3 h-3 bg-emerald-700 rounded-full" />
+            <span className="w-3 h-3 bg-emerald-700 rounded-full shrink-0" />
             <span>Mean Expected</span>
           </span>
         </div>
       </div>
 
       <div className="relative w-full overflow-x-auto">
-        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-auto">
+        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-auto min-w-[480px]">
           {/* Grid lines */}
           {[0, 10, 20, 30].map((val) => (
             <g key={val}>

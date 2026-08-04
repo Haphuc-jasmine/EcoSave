@@ -73,17 +73,17 @@ export default function DemoAccountsCard() {
   ];
 
   return (
-    <section id="demo-accounts" ref={sectionRef} className="py-16 bg-white">
+    <section id="demo-accounts" ref={sectionRef} className="py-12 sm:py-14 lg:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className={`text-center max-w-2xl mx-auto mb-12 transition-all duration-700 ease-out ${
+          className={`text-center max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12 transition-all duration-700 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}
         >
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
             {t('demoBadge')}
           </span>
-          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
             {t('demoTitle')}
           </h2>
           <p className="text-xs text-slate-600 mt-2">
@@ -91,13 +91,13 @@ export default function DemoAccountsCard() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           {DEMO_PROFILES.map((p, idx) => {
             const Icon = p.icon;
             return (
               <div
                 key={p.username}
-                className={`bg-[#F6F8F7] border border-slate-200/90 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 flex flex-col justify-between ${
+                className={`bg-[#F6F8F7] border border-slate-200/90 rounded-2xl p-5 sm:p-6 hover:shadow-lg transition-all duration-300 flex flex-col justify-between ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
                 }`}
                 style={{
@@ -132,7 +132,7 @@ export default function DemoAccountsCard() {
 
                 <Link
                   href={p.link}
-                  className="mt-5 w-full inline-flex items-center justify-center gap-1.5 bg-white hover:bg-emerald-700 hover:text-white text-emerald-800 border border-emerald-300/80 text-xs font-bold py-2.5 px-4 rounded-xl transition-all shadow-sm"
+                  className="mt-5 w-full min-h-[44px] inline-flex items-center justify-center gap-1.5 bg-white hover:bg-emerald-700 hover:text-white text-emerald-800 border border-emerald-300/80 text-xs font-bold py-2.5 px-4 rounded-xl transition-all shadow-sm"
                 >
                   <UserCheck className="w-3.5 h-3.5" />
                   <span>{t('demoLoginAs')} {p.name}</span>

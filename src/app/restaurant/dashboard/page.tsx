@@ -33,17 +33,17 @@ export default function RestaurantDashboardPage() {
 
   return (
     <PortalLayout>
-      <div className="space-y-6 max-w-7xl mx-auto pb-12">
+      <div className="space-y-4 sm:space-y-6 max-w-7xl mx-auto pb-12">
         {/* Header Title */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Today&apos;s Operating Picture</h1>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Today&apos;s Operating Picture</h1>
             <p className="text-xs text-slate-500 mt-1">
               Live kitchen metrics, AI demand prediction curve, and waste prevention guidance.
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-3 py-1.5 rounded-xl">
+            <span className="text-[11px] sm:text-xs font-mono font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 px-3 py-1.5 rounded-xl whitespace-nowrap">
               📅 {dateLabel ?? ' '} · {timeLabel ?? ' '}
             </span>
           </div>
@@ -62,7 +62,7 @@ export default function RestaurantDashboardPage() {
         <QuickActions />
 
         {/* Recent Orders & Environmental Mini Card Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           <div className="lg:col-span-2">
             <RecentOrdersTable />
           </div>

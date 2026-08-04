@@ -88,9 +88,9 @@ export default function MealDetailModal({ listing, onClose }: MealDetailModalPro
       className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+      <div className="bg-white w-full sm:max-w-lg sm:mx-4 rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
         {/* Image Header */}
-        <div className="relative h-52 shrink-0">
+        <div className="relative h-40 sm:h-52 shrink-0">
           <img
             src={listing.image}
             alt={listing.mealName}
@@ -117,7 +117,7 @@ export default function MealDetailModal({ listing, onClose }: MealDetailModalPro
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
           {/* Meta Row */}
           <div className="flex items-center gap-4 flex-wrap text-xs text-slate-500">
             <span className="flex items-center gap-1">
@@ -174,13 +174,13 @@ export default function MealDetailModal({ listing, onClose }: MealDetailModalPro
           {/* Quantity Selector */}
           <div>
             <label className="text-xs font-bold text-slate-700 mb-2 block">Select Quantity</label>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
               <button
                 id="qty-decrease-btn"
                 type="button"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                 disabled={quantity <= 1}
-                className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors shrink-0"
               >
                 <Minus className="w-4 h-4 text-slate-700" />
               </button>
@@ -190,11 +190,11 @@ export default function MealDetailModal({ listing, onClose }: MealDetailModalPro
                 type="button"
                 onClick={() => setQuantity((q) => Math.min(maxQty, q + 1))}
                 disabled={quantity >= maxQty}
-                className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors"
+                className="w-11 h-11 sm:w-10 sm:h-10 rounded-xl bg-slate-100 hover:bg-slate-200 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors shrink-0"
               >
                 <Plus className="w-4 h-4 text-slate-700" />
               </button>
-              <div className="flex-1 text-right">
+              <div className="flex-1 text-right min-w-[100px]">
                 <div className="text-base font-extrabold text-slate-900">
                   {totalSalePrice.toLocaleString()} đ
                 </div>
@@ -208,13 +208,13 @@ export default function MealDetailModal({ listing, onClose }: MealDetailModalPro
           {/* ── Fulfillment Selector ── */}
           <div>
             <label className="text-xs font-bold text-slate-700 mb-2 block">How do you want to get it?</label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               {/* Pickup option */}
               <button
                 id="fulfillment-pickup-btn"
                 type="button"
                 onClick={() => { setFulfillmentType('pickup'); setErrorMsg(''); }}
-                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-4 transition-all duration-200 ${
+                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-3 sm:p-4 transition-all duration-200 min-h-[44px] ${
                   fulfillmentType === 'pickup'
                     ? 'border-emerald-500 bg-emerald-50 shadow-md shadow-emerald-100'
                     : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
@@ -241,7 +241,7 @@ export default function MealDetailModal({ listing, onClose }: MealDetailModalPro
                 id="fulfillment-delivery-btn"
                 type="button"
                 onClick={() => { setFulfillmentType('delivery'); setErrorMsg(''); }}
-                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-4 transition-all duration-200 ${
+                className={`flex flex-col items-center gap-2 rounded-2xl border-2 p-3 sm:p-4 transition-all duration-200 min-h-[44px] ${
                   fulfillmentType === 'delivery'
                     ? 'border-blue-500 bg-blue-50 shadow-md shadow-blue-100'
                     : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
@@ -312,12 +312,12 @@ export default function MealDetailModal({ listing, onClose }: MealDetailModalPro
         </div>
 
         {/* CTA */}
-        <div className="p-4 pt-3 border-t border-slate-100 bg-white shrink-0">
+        <div className="p-3 sm:p-4 pt-3 border-t border-slate-100 bg-white shrink-0">
           <button
             id="reserve-meal-btn"
             onClick={handleReserve}
             disabled={listing.quantity === 0 || listing.status !== 'active' || reserveState === 'loading'}
-            className={`w-full flex items-center justify-center gap-2 font-bold text-sm py-3.5 rounded-2xl transition-all ${
+            className={`w-full flex items-center justify-center gap-2 font-bold text-sm py-3.5 rounded-2xl transition-all min-h-[44px] ${
               listing.status === 'active' && listing.quantity > 0
                 ? fulfillmentType === 'delivery'
                   ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-600/20 hover:scale-[1.01]'

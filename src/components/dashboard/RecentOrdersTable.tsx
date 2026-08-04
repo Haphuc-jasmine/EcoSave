@@ -12,19 +12,19 @@ export default function RecentOrdersTable() {
   const displayOrders = mounted ? orders : [];
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
         <div>
-          <h3 className="text-base font-bold text-slate-900">Recent Marketplace Reservations</h3>
+          <h3 className="text-sm sm:text-base font-bold text-slate-900">Recent Marketplace Reservations</h3>
           <p className="text-xs text-slate-500">Live mock customer orders & pickup verification codes</p>
         </div>
-        <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+        <span className="self-start sm:self-auto text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full whitespace-nowrap">
           {displayOrders.length} Reservations
         </span>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs border-collapse border border-slate-200/80">
+      <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+        <table className="w-full min-w-[640px] sm:min-w-0 text-left text-xs border-collapse border border-slate-200/80">
           <thead>
             <tr className="bg-slate-50 text-slate-500 font-semibold uppercase text-[10px]">
               <th className="p-3 border border-slate-200/80">Order ID & Code</th>

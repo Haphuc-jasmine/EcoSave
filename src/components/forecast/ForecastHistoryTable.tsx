@@ -75,7 +75,7 @@ export default function ForecastHistoryTable() {
   ).toFixed(1);
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+    <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div>
           <h3 className="text-base font-extrabold text-slate-900">
@@ -92,7 +92,7 @@ export default function ForecastHistoryTable() {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full text-left text-xs">
+        <table className="w-full min-w-[720px] text-left text-xs">
           <thead>
             <tr className="border-b border-slate-200 text-slate-700 font-bold uppercase text-[10px]">
               <th className="pb-3">Date</th>

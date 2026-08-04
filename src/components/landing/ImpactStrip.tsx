@@ -20,17 +20,17 @@ export default function ImpactStrip() {
   const waterL = mounted ? impactRecord.waterSavedL : 45500;
 
   return (
-    <section id="impact" ref={sectionRef} className="py-16 bg-emerald-950 text-white relative overflow-hidden">
+    <section id="impact" ref={sectionRef} className="py-12 sm:py-14 lg:py-16 bg-emerald-950 text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div
-          className={`text-center max-w-2xl mx-auto mb-12 transition-all duration-700 ease-out ${
+          className={`text-center max-w-2xl mx-auto mb-8 sm:mb-10 lg:mb-12 transition-all duration-700 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}
         >
           <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
             {t('impactBadge')}
           </span>
-          <h2 className="text-3xl font-extrabold tracking-tight mt-1 text-white">
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1 text-white">
             {t('impactTitle')}
           </h2>
           <p className="text-xs text-emerald-200/70 mt-2">
@@ -38,9 +38,9 @@ export default function ImpactStrip() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 lg:gap-6 text-center">
           <div
-            className={`bg-emerald-900/40 p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
+            className={`bg-emerald-900/40 p-3 sm:p-4 lg:p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}
             style={{ transitionDelay: isVisible ? '80ms' : '0ms' }}
@@ -55,7 +55,7 @@ export default function ImpactStrip() {
           </div>
 
           <div
-            className={`bg-emerald-900/40 p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
+            className={`bg-emerald-900/40 p-3 sm:p-4 lg:p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}
             style={{ transitionDelay: isVisible ? '160ms' : '0ms' }}
@@ -70,7 +70,7 @@ export default function ImpactStrip() {
           </div>
 
           <div
-            className={`bg-emerald-900/40 p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
+            className={`bg-emerald-900/40 p-3 sm:p-4 lg:p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}
             style={{ transitionDelay: isVisible ? '240ms' : '0ms' }}
@@ -85,7 +85,7 @@ export default function ImpactStrip() {
           </div>
 
           <div
-            className={`bg-emerald-900/40 p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
+            className={`bg-emerald-900/40 p-3 sm:p-4 lg:p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm transition-all duration-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}
             style={{ transitionDelay: isVisible ? '320ms' : '0ms' }}
@@ -100,7 +100,7 @@ export default function ImpactStrip() {
           </div>
 
           <div
-            className={`bg-emerald-900/40 p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm col-span-2 md:col-span-1 transition-all duration-500 ${
+            className={`bg-emerald-900/40 p-3 sm:p-4 lg:p-5 rounded-2xl border border-emerald-800/50 backdrop-blur-sm col-span-2 md:col-span-1 transition-all duration-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
             }`}
             style={{ transitionDelay: isVisible ? '400ms' : '0ms' }}

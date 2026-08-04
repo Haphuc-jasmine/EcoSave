@@ -19,7 +19,7 @@ export default function ListingCard({ listing, onClick }: ListingCardProps) {
       className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 overflow-hidden text-left w-full"
     >
       {/* Image */}
-      <div className="relative h-44 overflow-hidden">
+      <div className="relative h-36 sm:h-44 overflow-hidden">
         <img
           src={listing.image}
           alt={listing.mealName}
@@ -45,7 +45,7 @@ export default function ListingCard({ listing, onClick }: ListingCardProps) {
       </div>
 
       {/* Info */}
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         <div className="text-[11px] font-semibold text-slate-500 mb-0.5">{listing.restaurantName}</div>
         <h3 className="text-sm font-bold text-slate-900 leading-snug line-clamp-2">
           {listing.mealName}
@@ -66,22 +66,22 @@ export default function ListingCard({ listing, onClick }: ListingCardProps) {
         )}
 
         {/* Meta row */}
-        <div className="flex items-center gap-3 mt-3 text-[11px] text-slate-500">
+        <div className="flex items-center gap-2 sm:gap-3 mt-3 text-[11px] text-slate-500 flex-wrap">
           <span className="flex items-center gap-1">
             <MapPin className="w-3 h-3 text-slate-400" /> {listing.distance}
           </span>
           <span className="flex items-center gap-1">
             <Clock className="w-3 h-3 text-slate-400" /> {listing.expiresAt}
           </span>
-          <span className="flex items-center gap-1 ml-auto">
+          <span className="flex items-center gap-1 sm:ml-auto">
             <Star className="w-3 h-3 text-amber-400 fill-amber-400" /> {listing.rating}
           </span>
         </div>
 
         {/* Pricing */}
-        <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-100">
+        <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-100 flex-wrap gap-1">
           <div>
-            <span className="text-base font-extrabold text-emerald-700">
+            <span className="text-sm sm:text-base font-extrabold text-emerald-700">
               {listing.salePrice.toLocaleString()} đ
             </span>
             <span className="text-xs text-slate-400 line-through ml-2">

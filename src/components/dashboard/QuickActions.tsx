@@ -20,14 +20,14 @@ export default function QuickActions() {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-sm">
       <h3 className="text-sm font-bold text-slate-900 mb-4">Quick Kitchen Actions</h3>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {/* Action 1: Run Forecast */}
         <button
           onClick={openForecastModal}
-          className="p-4 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/80 rounded-2xl text-left transition-all group flex flex-col justify-between h-28"
+          className="min-h-[44px] p-4 bg-emerald-50 hover:bg-emerald-100/80 border border-emerald-200/80 rounded-2xl text-left transition-all group flex flex-col justify-between h-28"
         >
           <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
             <Sparkles className="w-4 h-4 text-amber-300" />
@@ -39,7 +39,7 @@ export default function QuickActions() {
         </button>
 
         {/* Action 2: Add Actual Sales */}
-        <div className="p-4 bg-blue-50/70 border border-blue-200/70 rounded-2xl text-left transition-all flex flex-col justify-between h-28">
+        <div className="min-h-[44px] p-4 bg-blue-50/70 border border-blue-200/70 rounded-2xl text-left transition-all flex flex-col justify-between h-28">
           <div className="flex items-center justify-between">
             <div className="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center">
               <PlusCircle className="w-4 h-4" />
@@ -79,7 +79,7 @@ export default function QuickActions() {
         {/* Action 3: Upload Surplus */}
         <Link
           href="/restaurant/surplus"
-          className="p-4 bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/80 rounded-2xl text-left transition-all group flex flex-col justify-between h-28"
+          className="min-h-[44px] p-4 bg-amber-50/70 hover:bg-amber-100/70 border border-amber-200/80 rounded-2xl text-left transition-all group flex flex-col justify-between h-28"
         >
           <div className="w-8 h-8 rounded-xl bg-amber-600 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
             <PackagePlus className="w-4 h-4" />
@@ -93,7 +93,7 @@ export default function QuickActions() {
         {/* Action 4: Generate ESG Report */}
         <Link
           href="/restaurant/esg"
-          className="p-4 bg-teal-50/70 hover:bg-teal-100/70 border border-teal-200/80 rounded-2xl text-left transition-all group flex flex-col justify-between h-28"
+          className="min-h-[44px] p-4 bg-teal-50/70 hover:bg-teal-100/70 border border-teal-200/80 rounded-2xl text-left transition-all group flex flex-col justify-between h-28"
         >
           <div className="w-8 h-8 rounded-xl bg-teal-700 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
             <FileText className="w-4 h-4" />

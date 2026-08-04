@@ -58,7 +58,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative pt-12 pb-16 overflow-hidden">
+    <section className="relative pt-8 sm:pt-10 lg:pt-12 pb-10 sm:pb-14 lg:pb-16 overflow-hidden">
       {/* Background Slideshow Layer — subtle parallax via translateY */}
       <div
         className="absolute inset-0 overflow-hidden"
@@ -102,7 +102,7 @@ export default function HeroSection() {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
             {t('heroTitle1')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600">
               {t('heroTitle2')}
@@ -111,7 +111,7 @@ export default function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-slate-700 leading-relaxed font-medium">
+          <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-medium">
             {t('heroSubtitle')}
           </p>
 
@@ -136,7 +136,7 @@ export default function HeroSection() {
           </div>
 
           {/* Value Prop Highlights */}
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs font-semibold text-slate-600">
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-semibold text-slate-600">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600" /> {t('heroProp1')}
             </span>

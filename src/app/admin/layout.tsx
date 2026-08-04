@@ -65,7 +65,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link
                 key={item.href}
                 href={item.href}
-                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all bg-amber-600 text-white font-bold shadow-sm"
+                className="flex items-center gap-3 px-3.5 py-3 md:py-2.5 rounded-xl text-xs font-medium transition-all bg-amber-600 text-white font-bold shadow-sm min-h-[44px]"
               >
                 <Icon className="w-4 h-4 text-white" />
                 <span>{item.label}</span>
@@ -97,17 +97,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 bg-white border-b border-slate-200 px-6 flex items-center justify-between sticky top-0 z-40 shadow-sm">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
-            Admin Control Panel — Platform Analytics
+        <header className="h-16 bg-white border-b border-slate-200 px-3 sm:px-6 flex items-center justify-between gap-2 sticky top-0 z-40 shadow-sm">
+          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 truncate">
+            Admin Control Panel <span className="hidden sm:inline">— Platform Analytics</span>
           </span>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs text-slate-500 font-mono">Live Demo Mode</span>
+            <span className="hidden sm:inline text-xs text-slate-500 font-mono">Live Demo Mode</span>
           </div>
         </header>
 
-        <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">{children}</div>
+        <div className="flex-1 p-3 sm:p-6 lg:p-8 overflow-y-auto overflow-x-hidden">{children}</div>
       </div>
     </div>
   );

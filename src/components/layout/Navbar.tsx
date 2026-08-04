@@ -91,9 +91,9 @@ export default function Navbar() {
         </nav>
 
         {/* Right Action Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Language Switcher */}
-          <div className="flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
+          <div className="hidden sm:flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200/80 text-xs font-semibold">
             <button
               onClick={() => setLanguage('en')}
               title="English"
@@ -121,14 +121,14 @@ export default function Navbar() {
           </div>
 
           {mounted && currentUser ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Link
                 href={getPortalLink()}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-full hover:bg-emerald-100 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2.5 sm:px-3 py-1.5 rounded-full hover:bg-emerald-100 transition-colors max-w-[110px] sm:max-w-none"
               >
-                <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>{currentUser.name}</span>
-                <span className="bg-emerald-700 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase">
+                <UserCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span className="truncate">{currentUser.name}</span>
+                <span className="hidden sm:inline bg-emerald-700 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase">
                   {currentUser.role}
                 </span>
               </Link>
@@ -163,7 +163,7 @@ export default function Navbar() {
             <button
               onClick={handleReset}
               title="Reset Demo Data"
-              className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-emerald-700 bg-slate-100 hover:bg-emerald-50 px-2.5 py-1.5 rounded-lg transition-colors"
+              className="hidden sm:inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-emerald-700 bg-slate-100 hover:bg-emerald-50 px-2.5 py-1.5 rounded-lg transition-colors"
             >
               <RotateCcw className="w-3 h-3" />
               <span className="hidden lg:inline">Reset</span>
@@ -183,36 +183,36 @@ export default function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200/80 bg-white/95 backdrop-blur-md px-4 pt-3 pb-4 space-y-2">
+        <div className="md:hidden border-t border-slate-200/80 bg-white/95 backdrop-blur-md px-4 pt-3 pb-4 space-y-1.5 max-h-[calc(100vh-72px)] overflow-y-auto">
           <a
             href="#features"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="block py-2 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50"
+            className="block py-3 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50 min-h-[44px] flex items-center"
           >
             Features
           </a>
           <a
             href="#impact"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="block py-2 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50"
+            className="block py-3 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50 min-h-[44px] flex items-center"
           >
             ESG Reports
           </a>
           <a
             href="/login?role=customer"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="block py-2 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50"
+            className="block py-3 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50 min-h-[44px] flex items-center"
           >
             Marketplace
           </a>
           <a
             href="#how-it-works"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="block py-2 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50"
+            className="block py-3 px-3 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-700 hover:bg-emerald-50/50 min-h-[44px] flex items-center"
           >
             About
           </a>
-          <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between px-3">
+          <div className="pt-2 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-3 px-3 py-2">
             <span className="text-xs font-semibold text-slate-500 flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5 text-emerald-600" /> Language
             </span>
@@ -220,7 +220,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLanguage('en')}
                 title="English"
-                className={`px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 ${
+                className={`px-2.5 py-1.5 rounded-md transition-all flex items-center gap-1.5 ${
                   language === 'en'
                     ? 'bg-white text-emerald-950 shadow-sm font-bold border border-slate-200/60'
                     : 'text-slate-500 hover:text-slate-800 opacity-60 hover:opacity-100'
@@ -232,7 +232,7 @@ export default function Navbar() {
               <button
                 onClick={() => setLanguage('vi')}
                 title="Tiếng Việt"
-                className={`px-2.5 py-1 rounded-md transition-all flex items-center gap-1.5 ${
+                className={`px-2.5 py-1.5 rounded-md transition-all flex items-center gap-1.5 ${
                   language === 'vi'
                     ? 'bg-white text-emerald-950 shadow-sm font-bold border border-slate-200/60'
                     : 'text-slate-500 hover:text-slate-800 opacity-60 hover:opacity-100'
@@ -243,6 +243,18 @@ export default function Navbar() {
               </button>
             </div>
           </div>
+          {mounted && (
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                handleReset();
+              }}
+              className="w-full flex items-center gap-2 py-3 px-3 rounded-lg text-sm font-semibold text-slate-500 hover:text-emerald-700 hover:bg-emerald-50/50 min-h-[44px]"
+            >
+              <RotateCcw className="w-4 h-4" />
+              Reset Demo Data
+            </button>
+          )}
         </div>
       )}
     </header>

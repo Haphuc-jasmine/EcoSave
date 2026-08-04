@@ -67,13 +67,13 @@ function Section({
 }) {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-      <div className="flex items-center gap-3 px-6 py-4 border-b border-slate-100 bg-slate-50/60">
-        <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center">
+      <div className="flex items-center gap-3 px-4 sm:px-6 py-4 border-b border-slate-100 bg-slate-50/60">
+        <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shrink-0">
           <Icon className="w-4 h-4 text-emerald-600" />
         </div>
         <h2 className="text-sm font-bold text-slate-800">{title}</h2>
       </div>
-      <div className="p-6 space-y-5">{children}</div>
+      <div className="p-4 sm:p-6 space-y-5">{children}</div>
     </div>
   );
 }
@@ -225,7 +225,7 @@ function ProfileForm({
         </div>
 
         {/* ── Identity card (read-only overview) ── */}
-        <div className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-6 flex items-center gap-5 text-white shadow-lg shadow-emerald-900/20">
+        <div className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-4 sm:p-6 flex items-center gap-4 sm:gap-5 text-white shadow-lg shadow-emerald-900/20">
           <div className="w-16 h-16 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center text-3xl shrink-0 select-none">
             🍕
           </div>
@@ -370,9 +370,9 @@ function ProfileForm({
         </div>
 
         {/* ── Save Button ── */}
-        <div className="flex items-center justify-end gap-3 pt-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-3 pt-2">
           {dirty && (
-            <span className="text-xs text-amber-600 font-medium animate-pulse">
+            <span className="text-xs text-amber-600 font-medium animate-pulse text-center sm:text-left">
               Unsaved changes
             </span>
           )}
@@ -380,7 +380,7 @@ function ProfileForm({
             id="profile-save-btn"
             onClick={handleSave}
             disabled={!dirty}
-            className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 ${
+            className={`flex items-center justify-center gap-2 px-6 py-3 sm:py-2.5 text-sm font-bold rounded-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 w-full sm:w-auto min-h-[44px] sm:min-h-0 ${
               dirty
                 ? 'bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white shadow-md shadow-emerald-900/20'
                 : 'bg-slate-100 text-slate-400 cursor-not-allowed'

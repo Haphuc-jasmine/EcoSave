@@ -121,7 +121,7 @@ function LoginFormContent() {
       <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 bg-white rounded-3xl border border-slate-200/90 shadow-2xl overflow-hidden">
         
         {/* Left Side: Brand Visual */}
-        <div className="md:col-span-5 bg-gradient-to-b from-emerald-900 to-emerald-950 text-white p-8 flex flex-col justify-between relative overflow-hidden">
+        <div className="md:col-span-5 bg-gradient-to-b from-emerald-900 to-emerald-950 text-white p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-600/10 rounded-full blur-2xl pointer-events-none" />
 
           <div>
@@ -176,11 +176,11 @@ function LoginFormContent() {
           <p className="text-xs text-slate-500 mb-6">Select a demo role to inspect pre-seeded data</p>
 
           {/* Role Tabs */}
-          <div className="grid grid-cols-3 gap-2 p-1 bg-slate-100 rounded-xl mb-5 text-xs font-semibold">
+          <div className="grid grid-cols-3 gap-1.5 sm:gap-2 p-1 bg-slate-100 rounded-xl mb-5 text-[11px] sm:text-xs font-semibold">
             <button
               type="button"
               onClick={() => handleTabChange('restaurant')}
-              className={`py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+              className={`py-2.5 sm:py-2 px-1.5 sm:px-3 rounded-lg flex items-center justify-center gap-1 sm:gap-1.5 transition-all ${
                 activeTab === 'restaurant'
                   ? 'bg-white text-emerald-900 shadow-sm font-bold'
                   : 'text-slate-600 hover:text-slate-900'
@@ -192,7 +192,7 @@ function LoginFormContent() {
             <button
               type="button"
               onClick={() => handleTabChange('customer')}
-              className={`py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+              className={`py-2.5 sm:py-2 px-1.5 sm:px-3 rounded-lg flex items-center justify-center gap-1 sm:gap-1.5 transition-all ${
                 activeTab === 'customer'
                   ? 'bg-white text-emerald-900 shadow-sm font-bold'
                   : 'text-slate-600 hover:text-slate-900'
@@ -204,7 +204,7 @@ function LoginFormContent() {
             <button
               type="button"
               onClick={() => handleTabChange('admin')}
-              className={`py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 transition-all ${
+              className={`py-2.5 sm:py-2 px-1.5 sm:px-3 rounded-lg flex items-center justify-center gap-1 sm:gap-1.5 transition-all ${
                 activeTab === 'admin'
                   ? 'bg-white text-emerald-900 shadow-sm font-bold'
                   : 'text-slate-600 hover:text-slate-900'
@@ -259,7 +259,7 @@ function LoginFormContent() {
                   <button
                     type="button"
                     onClick={() => handleQuickFill('pizza')}
-                    className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
+                    className={`w-full sm:w-auto min-h-[40px] text-xs px-3 py-2 rounded-lg border transition-all ${
                       username === 'pizza'
                         ? 'bg-emerald-50 border-emerald-500 text-emerald-900 font-bold'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
@@ -270,7 +270,7 @@ function LoginFormContent() {
                   <button
                     type="button"
                     onClick={() => handleQuickFill('phobo')}
-                    className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
+                    className={`w-full sm:w-auto min-h-[40px] text-xs px-3 py-2 rounded-lg border transition-all ${
                       username === 'phobo'
                         ? 'bg-emerald-50 border-emerald-500 text-emerald-900 font-bold'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
@@ -281,7 +281,7 @@ function LoginFormContent() {
                   <button
                     type="button"
                     onClick={() => handleQuickFill('sushi')}
-                    className={`text-xs px-3 py-1.5 rounded-lg border transition-all ${
+                    className={`w-full sm:w-auto min-h-[40px] text-xs px-3 py-2 rounded-lg border transition-all ${
                       username === 'sushi'
                         ? 'bg-emerald-50 border-emerald-500 text-emerald-900 font-bold'
                         : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
@@ -295,7 +295,7 @@ function LoginFormContent() {
                 <button
                   type="button"
                   onClick={() => handleQuickFill('phucha')}
-                  className="text-xs px-3 py-1.5 rounded-lg border bg-emerald-50 border-emerald-500 text-emerald-900 font-bold"
+                  className="w-full sm:w-auto min-h-[40px] text-xs px-3 py-2 rounded-lg border bg-emerald-50 border-emerald-500 text-emerald-900 font-bold"
                 >
                   👤 Phuc Ha (@phucha)
                 </button>
@@ -304,7 +304,7 @@ function LoginFormContent() {
                 <button
                   type="button"
                   onClick={() => handleQuickFill('admin')}
-                  className="text-xs px-3 py-1.5 rounded-lg border bg-emerald-50 border-emerald-500 text-emerald-900 font-bold"
+                  className="w-full sm:w-auto min-h-[40px] text-xs px-3 py-2 rounded-lg border bg-emerald-50 border-emerald-500 text-emerald-900 font-bold"
                 >
                   🛡️ EcoSave Admin (@admin)
                 </button>

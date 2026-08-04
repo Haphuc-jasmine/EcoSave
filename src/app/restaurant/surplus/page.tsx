@@ -128,7 +128,7 @@ export default function SurplusPublishPage() {
     return (
       <PortalLayout>
         <div className="max-w-2xl mx-auto pb-12">
-          <div className="bg-gradient-to-br from-emerald-900 to-teal-950 text-white rounded-3xl p-8 shadow-2xl border border-emerald-700 text-center">
+          <div className="bg-gradient-to-br from-emerald-900 to-teal-950 text-white rounded-3xl p-4 sm:p-6 lg:p-8 shadow-2xl border border-emerald-700 text-center">
             <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 mx-auto flex items-center justify-center mb-4">
               <CheckCircle2 className="w-8 h-8 text-emerald-300" />
             </div>
@@ -140,7 +140,7 @@ export default function SurplusPublishPage() {
               Your surplus meal is now live on the EcoSave marketplace.
             </p>
 
-            <div className="grid grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               <div className="bg-emerald-800/40 rounded-2xl p-4 border border-emerald-700/40">
                 <div className="text-xl font-extrabold text-amber-300">
                   {appliedDiscount}%
@@ -210,7 +210,7 @@ export default function SurplusPublishPage() {
           {/* Left Column — Main Form */}
           <div className="lg:col-span-2 space-y-5">
             {/* Meal Details */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm space-y-4">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-500" /> Meal Details
               </h3>
@@ -228,7 +228,7 @@ export default function SurplusPublishPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-700">Category</label>
                   <select
@@ -274,7 +274,7 @@ export default function SurplusPublishPage() {
             </div>
 
             {/* Pricing */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm space-y-4">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <Tag className="w-4 h-4 text-emerald-600" /> Pricing Configuration
               </h3>
@@ -362,7 +362,7 @@ export default function SurplusPublishPage() {
             </div>
 
             {/* Dietary Tags */}
-            <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-3">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 border border-slate-200 shadow-sm space-y-3">
               <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
                 <Leaf className="w-4 h-4 text-emerald-600" /> Dietary Tags
               </h3>

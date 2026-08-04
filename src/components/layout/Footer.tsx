@@ -4,8 +4,8 @@ import { Leaf, Heart } from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="bg-emerald-950 text-emerald-100/80 border-t border-emerald-900/40 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           {/* Col 1 */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-3">
@@ -25,19 +25,19 @@ export default function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-3">
               Platform Demo
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-1 text-xs">
               <li>
-                <a href="/login" className="hover:text-white transition-colors">
+                <a href="/login" className="inline-block py-1.5 hover:text-white transition-colors">
                   Restaurant Portal
                 </a>
               </li>
               <li>
-                <a href="/login" className="hover:text-white transition-colors">
+                <a href="/login" className="inline-block py-1.5 hover:text-white transition-colors">
                   Customer Marketplace
                 </a>
               </li>
               <li>
-                <a href="/login" className="hover:text-white transition-colors">
+                <a href="/login" className="inline-block py-1.5 hover:text-white transition-colors">
                   Admin Analytics
                 </a>
               </li>

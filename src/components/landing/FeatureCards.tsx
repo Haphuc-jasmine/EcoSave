@@ -75,17 +75,17 @@ export default function FeatureCards() {
   ];
 
   return (
-    <section id="features" ref={sectionRef} className="py-20 bg-[#F6F8F7]">
+    <section id="features" ref={sectionRef} className="py-12 sm:py-16 lg:py-20 bg-[#F6F8F7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className={`text-center max-w-2xl mx-auto mb-16 transition-all duration-700 ease-out ${
+          className={`text-center max-w-2xl mx-auto mb-10 sm:mb-12 lg:mb-16 transition-all duration-700 ease-out ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
           }`}
         >
           <h2 className="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-2">
             {t('featuresBadge')}
           </h2>
-          <p className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl">
+          <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight lg:text-4xl">
             {language === 'vi' ? (
               <>
                 Tất Cả Những Gì Nhà Hàng <br />& Khách Hàng Cần
@@ -99,14 +99,14 @@ export default function FeatureCards() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
           {FEATURES.map((feat, idx) => {
             const Icon = feat.icon;
             const style = CARD_STYLES[idx];
             return (
               <div
                 key={feat.titleKey}
-                className={`${style.bg} ${style.hover} ${style.shadow} rounded-2xl p-8 border transition-all duration-300 ease-out hover:-translate-y-1.5 flex flex-col justify-between group ${
+                className={`${style.bg} ${style.hover} ${style.shadow} rounded-2xl p-5 sm:p-6 lg:p-8 border transition-all duration-300 ease-out hover:-translate-y-1.5 flex flex-col justify-between group ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
                 }`}
               >

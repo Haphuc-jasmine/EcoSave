@@ -45,11 +45,11 @@ export default function SalesForecastChart() {
   const activeItem = hoveredIndex !== null ? HOURLY_DATA[hoveredIndex] : null;
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm">
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-slate-200/90 shadow-sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
         <div>
-          <div className="flex items-center gap-2">
-            <h3 className="text-base font-bold text-slate-900">Hourly Demand: Actual vs AI Forecast</h3>
+          <div className="flex items-center gap-2 flex-wrap">
+            <h3 className="text-sm sm:text-base font-bold text-slate-900">Hourly Demand: Actual vs AI Forecast</h3>
             <span className="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
               LIVE TODAY
             </span>
@@ -72,8 +72,12 @@ export default function SalesForecastChart() {
       </div>
 
       {/* SVG Chart Area */}
-      <div className="relative w-full overflow-x-auto">
-        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-auto overflow-visible">
+      <div className="relative w-full overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+        <svg
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+          className="h-auto overflow-visible w-full"
+          style={{ minWidth: svgWidth * 0.7 }}
+        >
           {/* Horizontal Grid lines */}
           {[0, 10, 20, 30].map((val) => (
             <g key={val}>

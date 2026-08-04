@@ -99,12 +99,12 @@ export default function AdminOverviewPage() {
   return (
     <div className="max-w-7xl mx-auto pb-12 space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm">
         <div>
           <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full mb-2">
             <ShieldCheck className="w-4 h-4 text-amber-700" /> Executive Platform Control
           </div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Platform Analytics Overview
           </h1>
           <p className="text-sm font-medium text-slate-700 mt-1">
@@ -112,13 +112,13 @@ export default function AdminOverviewPage() {
           </p>
         </div>
         <div className="flex items-center gap-2 bg-emerald-100/80 border border-emerald-300 px-4 py-2 rounded-2xl text-xs font-mono font-bold text-emerald-900 shadow-2xs">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
-          📅 July 27, 2026 — Live Monitor
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse shrink-0" />
+          <span>📅 July 27, 2026 — Live Monitor</span>
         </div>
       </div>
 
       {/* Prominent Platform KPI Cards (6 Grid Cards) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-5">
         {[
           {
             label: 'Meals Rescued',
@@ -193,16 +193,16 @@ export default function AdminOverviewPage() {
           return (
             <div
               key={kpi.label}
-              className={`bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between`}
+              className={`bg-white rounded-3xl p-3 sm:p-5 border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex flex-col justify-between`}
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-bold text-slate-700">{kpi.label}</span>
-                  <div className={`w-10 h-10 rounded-2xl flex items-center justify-center border ${kpi.iconColor}`}>
-                    <Icon className="w-5 h-5" />
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center border shrink-0 ${kpi.iconColor}`}>
+                    <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                 </div>
-                <div className="text-3xl font-black text-slate-900 tracking-tight">
+                <div className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
                   {kpi.value}{' '}
                   {kpi.unit && <span className="text-sm font-bold text-slate-600">{kpi.unit}</span>}
                 </div>
@@ -221,7 +221,7 @@ export default function AdminOverviewPage() {
       {/* 2 Modern SaaS Analytics Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Chart 1: Revenue Recovered & CO2e Saved Growth Curve (8 cols) */}
-        <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+        <div className="lg:col-span-7 bg-white rounded-3xl p-4 sm:p-7 border border-slate-200 shadow-sm space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-slate-100">
             <div>
               <div className="flex items-center gap-2">
@@ -236,7 +236,7 @@ export default function AdminOverviewPage() {
             </div>
 
             {/* Legend */}
-            <div className="flex items-center gap-4 text-xs font-bold shrink-0">
+            <div className="flex items-center flex-wrap gap-3 sm:gap-4 text-xs font-bold shrink-0">
               <span className="flex items-center gap-1.5 text-emerald-900">
                 <span className="w-3 h-3 rounded-full bg-emerald-600" /> Revenue (M đ)
               </span>
@@ -247,8 +247,8 @@ export default function AdminOverviewPage() {
           </div>
 
           {/* SVG Trend Chart */}
-          <div className="h-64 w-full pt-4 relative">
-            <svg className="w-full h-full overflow-hidden" viewBox="0 0 500 200">
+          <div className="h-56 sm:h-64 w-full pt-4 relative overflow-x-auto">
+            <svg className="w-full h-full overflow-hidden min-w-[420px]" viewBox="0 0 500 200">
               <defs>
                 <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#059669" stopOpacity="0.3" />
@@ -391,7 +391,7 @@ export default function AdminOverviewPage() {
         </div>
 
         {/* Chart 2: Category Volume & Meal Distribution (5 cols) */}
-        <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white rounded-3xl p-4 sm:p-7 border border-slate-200 shadow-sm space-y-4 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-2 border-b border-slate-100">
               <div className="flex items-center gap-2">
@@ -442,7 +442,7 @@ export default function AdminOverviewPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Restaurant Leaderboard */}
         <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="px-4 sm:px-6 py-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2 bg-slate-50/50">
             <div className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-amber-600" />
               <h3 className="text-base font-extrabold text-slate-900">
@@ -458,7 +458,7 @@ export default function AdminOverviewPage() {
               leaderboard.map((r, idx) => (
                 <div
                   key={r.name}
-                  className="px-6 py-4 flex items-center gap-4 hover:bg-slate-50/80 transition-colors"
+                  className="px-4 sm:px-6 py-4 flex items-center gap-3 sm:gap-4 hover:bg-slate-50/80 transition-colors"
                 >
                   {/* Rank Badge */}
                   <div
@@ -505,7 +505,7 @@ export default function AdminOverviewPage() {
 
         {/* Active Marketplace Monitor */}
         <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-          <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="px-4 sm:px-6 py-4 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2 bg-slate-50/50">
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5 text-teal-700" />
               <h3 className="text-base font-extrabold text-slate-900">
@@ -522,7 +522,7 @@ export default function AdminOverviewPage() {
               listings.map((listing) => (
                 <div
                   key={listing.id}
-                  className="px-6 py-3.5 flex items-center gap-3.5 hover:bg-slate-50/80 transition-colors"
+                  className="px-4 sm:px-6 py-3.5 flex items-center gap-2.5 sm:gap-3.5 hover:bg-slate-50/80 transition-colors"
                 >
                   <div className="w-11 h-11 rounded-2xl overflow-hidden shrink-0 border border-slate-200">
                     <img
@@ -565,10 +565,10 @@ export default function AdminOverviewPage() {
       </div>
 
       {/* Prominent ESG Results Section */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden p-6 sm:p-7 space-y-6">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden p-4 sm:p-7 space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-800">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-800 shrink-0">
               <Leaf className="w-5 h-5" />
             </div>
             <div>
@@ -581,12 +581,12 @@ export default function AdminOverviewPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap w-full sm:w-auto">
             <select
               id="esg-period-select"
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="text-xs font-bold text-slate-800 border border-slate-300 rounded-xl px-3.5 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+              className="text-xs font-bold text-slate-800 border border-slate-300 rounded-xl px-3.5 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500/30 flex-1 sm:flex-none min-w-0"
             >
               {esgReports.map((r) => (
                 <option key={r.id} value={r.period}>
@@ -600,7 +600,7 @@ export default function AdminOverviewPage() {
               id="generate-esg-btn"
               onClick={handleGenerateReport}
               disabled={generatingReport}
-              className={`text-xs font-extrabold px-4 py-2 rounded-xl transition-all shadow-xs ${
+              className={`text-xs font-extrabold px-4 py-2 rounded-xl transition-all shadow-xs shrink-0 ${
                 reportGenerated
                   ? 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                   : 'bg-emerald-700 hover:bg-emerald-800 text-white'
@@ -625,7 +625,7 @@ export default function AdminOverviewPage() {
         {/* Prominent Larger Cards for ESG Metrics */}
         {mounted && currentReport && (
           <div className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-5">
               {[
                 {
                   label: 'Meals Rescued',
@@ -677,14 +677,14 @@ export default function AdminOverviewPage() {
                 return (
                   <div
                     key={m.label}
-                    className={`rounded-3xl p-5 border shadow-sm hover:shadow-md transition-all ${m.bgColor}`}
+                    className={`rounded-3xl p-3 sm:p-5 border shadow-sm hover:shadow-md transition-all ${m.bgColor}`}
                   >
                     <div className="flex items-center justify-between mb-3">
-                      <div className={`w-10 h-10 rounded-2xl flex items-center justify-center border ${m.iconColor}`}>
-                        <Icon className="w-5 h-5" />
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center border ${m.iconColor}`}>
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                     </div>
-                    <div className={`text-2xl sm:text-3xl font-black ${m.textColor}`}>
+                    <div className={`text-xl sm:text-2xl lg:text-3xl font-black ${m.textColor}`}>
                       {m.value} <span className="text-xs font-bold text-slate-700">{m.unit}</span>
                     </div>
                     <div className="text-xs font-extrabold text-slate-800 mt-1">{m.label}</div>
@@ -694,7 +694,7 @@ export default function AdminOverviewPage() {
             </div>
 
             {/* Methodology & Metadata Banner */}
-            <div className="bg-slate-900 text-white rounded-3xl p-6 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="bg-slate-900 text-white rounded-3xl p-4 sm:p-6 border border-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2 text-emerald-400 text-xs font-extrabold uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4" /> Official Calculation Methodology

@@ -81,8 +81,9 @@ export default function HeroSection() {
             />
           </div>
         ))}
-        {/* White overlay layers for strong text readability while keeping background photography visible */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/92 via-white/85 to-white/92 backdrop-blur-[3px]" />
+        {/* White overlay layers — lightened so the background photography stands out, with a stronger radial boost behind the text for contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/65 via-white/55 to-white/65 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_50%_45%,rgba(255,255,255,0.8),transparent_75%)]" />
       </div>
 
       {/* Subtle emerald tint bleed at top for brand feel */}

@@ -122,7 +122,7 @@ export const translations = {
     // Hero Section
     heroBadge: 'Nền Tảng ESG & Chợ Thực Phẩm Dư Cho Nhà Hàng Bằng AI',
     heroTitle1: 'Dự Báo Nhu Cầu.',
-    heroTitle2: 'Ngăn Thừa Thực Phẩm.',
+    heroTitle2: 'Ngăn Ngừa Thực Phẩm Dư Thừa.',
     heroTitle3: 'Thu Hồi Doanh Thu.',
     heroSubtitle:
       'Giải pháp ESG toàn diện giúp nhà hàng dự báo suất ăn hàng ngày trước khi chế biến thừa, bán thực phẩm dư và tự động hóa báo cáo giảm phát thải carbon.',
@@ -200,7 +200,7 @@ export const translations = {
 
     // Demo Accounts Section
     demoBadge: 'Truy Cập 1-Click',
-    demoTitle: 'Tài Khoản Demo Cấu Hình Sẵn',
+    demoTitle: 'Tài Khoản Demo',
     demoSubtitle:
       'Không cần đăng ký hay email. Nhấp vào bất kỳ tài khoản nào để điền sẵn thông tin và truy cập cổng.',
     demoLoginAs: 'Đăng nhập với',

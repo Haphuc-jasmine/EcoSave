@@ -51,38 +51,34 @@ export default function FeatureCards() {
     {
       // AI (Emerald)
       bg: 'bg-white border-emerald-200',
-      hover: 'hover:border-emerald-400',
-      shadow: 'shadow-[0_8px_24px_rgba(4,120,87,0.08)] hover:shadow-[0_20px_40px_rgba(4,120,87,0.16)]',
-      accent: 'from-emerald-500 to-emerald-600',
-      iconBg: 'bg-emerald-100 text-emerald-700 border-emerald-200 group-hover:bg-emerald-600',
-      badge: 'bg-emerald-100 text-emerald-800',
+      hover: 'hover:border-emerald-300',
+      shadow: 'shadow-lg shadow-slate-900/5 hover:shadow-xl hover:shadow-slate-900/10',
+      iconBg: 'bg-emerald-600 text-white border-emerald-600',
+      badge: 'bg-emerald-50 text-emerald-700',
     },
     {
       // Pricing (Amber)
       bg: 'bg-white border-amber-200',
-      hover: 'hover:border-amber-400',
-      shadow: 'shadow-[0_8px_24px_rgba(180,83,9,0.08)] hover:shadow-[0_20px_40px_rgba(180,83,9,0.16)]',
-      accent: 'from-amber-500 to-amber-600',
-      iconBg: 'bg-amber-100 text-amber-700 border-amber-200 group-hover:bg-amber-600',
-      badge: 'bg-amber-100 text-amber-800',
+      hover: 'hover:border-amber-300',
+      shadow: 'shadow-lg shadow-slate-900/5 hover:shadow-xl hover:shadow-slate-900/10',
+      iconBg: 'bg-amber-500 text-white border-amber-500',
+      badge: 'bg-amber-50 text-amber-700',
     },
     {
       // Marketplace (Teal)
       bg: 'bg-white border-teal-200',
-      hover: 'hover:border-teal-400',
-      shadow: 'shadow-[0_8px_24px_rgba(13,148,136,0.08)] hover:shadow-[0_20px_40px_rgba(13,148,136,0.16)]',
-      accent: 'from-teal-500 to-teal-600',
-      iconBg: 'bg-teal-100 text-teal-700 border-teal-200 group-hover:bg-teal-600',
-      badge: 'bg-teal-100 text-teal-800',
+      hover: 'hover:border-teal-300',
+      shadow: 'shadow-lg shadow-slate-900/5 hover:shadow-xl hover:shadow-slate-900/10',
+      iconBg: 'bg-teal-600 text-white border-teal-600',
+      badge: 'bg-teal-50 text-teal-700',
     },
     {
       // ESG (Sky Blue)
       bg: 'bg-white border-sky-200',
-      hover: 'hover:border-sky-400',
-      shadow: 'shadow-[0_8px_24px_rgba(2,132,199,0.08)] hover:shadow-[0_20px_40px_rgba(2,132,199,0.16)]',
-      accent: 'from-sky-500 to-sky-600',
-      iconBg: 'bg-sky-100 text-sky-700 border-sky-200 group-hover:bg-sky-600',
-      badge: 'bg-sky-100 text-sky-800',
+      hover: 'hover:border-sky-300',
+      shadow: 'shadow-lg shadow-slate-900/5 hover:shadow-xl hover:shadow-slate-900/10',
+      iconBg: 'bg-sky-600 text-white border-sky-600',
+      badge: 'bg-sky-50 text-sky-700',
     },
   ];
 
@@ -100,7 +96,7 @@ export default function FeatureCards() {
           <p className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight lg:text-4xl">
             {language === 'vi' ? (
               <>
-                Tất cả những gì nhà hàng <br />& khách hàng cần
+                Nhà hàng và khách hàng cần gì?
               </>
             ) : (
               t('featuresTitle')
@@ -118,15 +114,13 @@ export default function FeatureCards() {
             return (
               <div
                 key={feat.titleKey}
-                className={`relative overflow-hidden ${style.bg} ${style.hover} ${style.shadow} rounded-2xl p-5 sm:p-6 lg:p-8 border-2 transition-all duration-300 ease-out hover:-translate-y-2 flex flex-col justify-between group ${
+                className={`${style.bg} ${style.hover} ${style.shadow} rounded-2xl p-5 sm:p-6 lg:p-8 border-2 transition-all duration-300 ease-out hover:-translate-y-1.5 flex flex-col justify-between group ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
                 }`}
               >
-                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${style.accent}`} />
-
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center border-2 group-hover:text-white group-hover:scale-110 transition-all duration-300 ${style.iconBg}`}>
+                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-all duration-300 ${style.iconBg}`}>
                       <Icon className="w-7 h-7" />
                     </div>
                     <span className={`text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full ${style.badge}`}>

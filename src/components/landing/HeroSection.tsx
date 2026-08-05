@@ -106,8 +106,7 @@ export default function HeroSection() {
             {t('heroTitle1')}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-emerald-600 to-teal-600">
               {t('heroTitle2')}
-            </span>{' '}
-            {t('heroTitle3')}
+            </span>
           </h1>
 
           {/* Subtitle */}
